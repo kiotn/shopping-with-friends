@@ -1,0 +1,8 @@
+1. Once "logged in" (if we can really call it logged in yet), the user is presented with a new
+    activity. Pressing the logout button brings the user back to the login activity, but more needs
+    to be done. There is an activity stack that will hold the "logged in activity" that should not
+    be available once logged out.
+    
+2. A user needs a way of registering an account. There are currently two dummy accounts.
+
+3. More artwork/ general appearance will be nice.
