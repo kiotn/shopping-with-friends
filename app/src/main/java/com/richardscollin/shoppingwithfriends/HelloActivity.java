@@ -17,9 +17,12 @@ public class HelloActivity extends ActionBarActivity {
     }
 
     public void logOut(View v) {
-        startActivity(new Intent(
-                HelloActivity.this, LoginActivity.class
-        ));
+
+        finish();
+
+    //    startActivity(new Intent(
+    //            HelloActivity.this, LoginActivity.class
+    //    ));
     }
 
 
