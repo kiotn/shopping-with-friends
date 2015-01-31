@@ -5,6 +5,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 
 public class HelloActivity extends ActionBarActivity {
@@ -15,7 +16,7 @@ public class HelloActivity extends ActionBarActivity {
         setContentView(R.layout.activity_hello);
     }
 
-    private void logOut() {
+    public void logOut(View v) {
         startActivity(new Intent(
                 HelloActivity.this, LoginActivity.class
         ));
