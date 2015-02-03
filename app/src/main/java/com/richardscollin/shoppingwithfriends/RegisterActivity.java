@@ -4,6 +4,8 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
 
 public class RegisterActivity extends ActionBarActivity {
@@ -12,6 +14,18 @@ public class RegisterActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+    }
+
+    public void register(View v) {
+        //add the email and password to the users string array in the main activity.
+        //email:password
+
+        String email = ((TextView) findViewById(R.id.registerEmail)).getText().toString();
+        String password = ((TextView) findViewById(R.id.registerPassword)).getText().toString();
+
+        String toBeAdded = email + ":" + password;
+
+
     }
 
 
