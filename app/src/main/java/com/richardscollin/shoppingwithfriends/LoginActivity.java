@@ -142,18 +142,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             showProgress(true);
             mAuthTask = new UserLoginTask(email, password);
             mAuthTask.execute((Void) null);
-            attemptLogin();
         }
 
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
         return email.contains("@");
     }
 
     private boolean isPasswordValid(String password) {
-        //TODO: Replace this with your own logic
         return password.length() > 4;
     }
 
@@ -247,6 +244,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mEmailView.setAdapter(adapter);
     }
 
+    public void launchRegistration(View v) {
+        startActivity(new Intent(
+                LoginActivity.this, RegisterActivity.class
+        ));
+    }
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -289,6 +292,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             mAuthTask = null;
             showProgress(false);
 
+            //We will pass account data through the intent.
             if (success) {
                 startActivity(new Intent(
                         LoginActivity.this, HelloActivity.class
@@ -306,6 +310,3 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         }
     }
 }
-
-
-
