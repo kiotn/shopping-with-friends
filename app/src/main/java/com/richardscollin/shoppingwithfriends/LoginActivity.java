@@ -40,9 +40,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
      * A dummy authentication store containing known user names and passwords.
      * TODO: remove after connecting to a real authentication system.
      */
-    private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
-    };
+    private static ArrayList<String> DUMMY_CREDENTIALS = new ArrayList();
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
@@ -58,6 +56,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //populate login info
+        DUMMY_CREDENTIALS.add("foo@example.com:hello");
+        DUMMY_CREDENTIALS.add("bar@example.com:world");
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -245,9 +247,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     public void launchRegistration(View v) {
-        startActivity(new Intent(
-                LoginActivity.this, RegisterActivity.class
-        ));
+        //add reference to DUMMY_CREDENTIALS
+        Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
+        i.putExtra("loginInfo", DUMMY_CREDENTIALS);
+        startActivity(i);
     }
 
     /**
@@ -294,9 +297,9 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             //We will pass account data through the intent.
             if (success) {
-                startActivity(new Intent(
-                        LoginActivity.this, HelloActivity.class
-                ));
+                Intent i = new Intent(LoginActivity.this, HelloActivity.class);
+                i.putExtra("email",mEmail);
+                startActivity(i);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

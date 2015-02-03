@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 
 public class HelloActivity extends ActionBarActivity {
@@ -14,15 +15,13 @@ public class HelloActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hello);
+        TextView hello = (TextView) findViewById(R.id.greeter);
+        Bundle extras = getIntent().getExtras();
+        hello.setText("Hello, " + extras.getString("email"));
     }
 
     public void logOut(View v) {
-
         finish();
-
-    //    startActivity(new Intent(
-    //            HelloActivity.this, LoginActivity.class
-    //    ));
     }
 
 

@@ -2,18 +2,25 @@ package com.richardscollin.shoppingwithfriends;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+
 
 public class RegisterActivity extends ActionBarActivity {
+
+    ArrayList<String> loginStuff = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+        Bundle extras = getIntent().getExtras();
+        loginStuff = extras.getStringArrayList("loginInfo");
     }
 
     public void register(View v) {
@@ -25,7 +32,7 @@ public class RegisterActivity extends ActionBarActivity {
 
         String toBeAdded = email + ":" + password;
 
-
+        loginStuff.add(toBeAdded);
     }
 
 
