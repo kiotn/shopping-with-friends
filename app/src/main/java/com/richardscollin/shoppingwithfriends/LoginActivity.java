@@ -43,8 +43,8 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         //populate login info
-        DUMMY_CREDENTIALS.add("foo@example.com:hello");
-        DUMMY_CREDENTIALS.add("bar@example.com:world");
+        DUMMY_CREDENTIALS.add("foo@example.com:" + "hello".hashCode());
+        DUMMY_CREDENTIALS.add("bar@example.com:" + "world".hashCode());
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
@@ -86,7 +86,7 @@ public class LoginActivity extends Activity {
         mPasswordView.setError(null);
 
         String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String password = "" + mPasswordView.getText().toString().hashCode();
 
         boolean cancel = false;
         View focusView = null;

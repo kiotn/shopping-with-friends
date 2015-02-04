@@ -23,7 +23,7 @@ public class RegisterActivity extends ActionBarActivity {
         String email = ((TextView) findViewById(R.id.registerEmail)).getText().toString();
         String password = ((TextView) findViewById(R.id.registerPassword)).getText().toString();
 
-        String toBeAdded = email + ":" + password;
+        String toBeAdded = email + ":" + password.hashCode();
 
         LoginActivity.DUMMY_CREDENTIALS.add(toBeAdded);
 
