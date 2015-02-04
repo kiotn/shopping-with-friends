@@ -32,7 +32,9 @@ public class RegisterActivity extends ActionBarActivity {
 
         String toBeAdded = email + ":" + password;
 
-        loginStuff.add(toBeAdded);
+        LoginActivity.DUMMY_CREDENTIALS.add(toBeAdded);
+
+        finish();
     }
 
 
