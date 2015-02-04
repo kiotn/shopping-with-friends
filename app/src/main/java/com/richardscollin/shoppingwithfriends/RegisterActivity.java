@@ -13,20 +13,13 @@ import java.util.ArrayList;
 
 public class RegisterActivity extends ActionBarActivity {
 
-    ArrayList<String> loginStuff = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-        Bundle extras = getIntent().getExtras();
-        loginStuff = extras.getStringArrayList("loginInfo");
     }
 
     public void register(View v) {
-        //add the email and password to the users string array in the main activity.
-        //email:password
-
         String email = ((TextView) findViewById(R.id.registerEmail)).getText().toString();
         String password = ((TextView) findViewById(R.id.registerPassword)).getText().toString();
 
@@ -34,6 +27,10 @@ public class RegisterActivity extends ActionBarActivity {
 
         LoginActivity.DUMMY_CREDENTIALS.add(toBeAdded);
 
+        finish();
+    }
+
+    public void cancelRegistration(View v) {
         finish();
     }
 
