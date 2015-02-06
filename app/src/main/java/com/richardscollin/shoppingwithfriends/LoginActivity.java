@@ -15,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 
 /**
@@ -22,12 +23,6 @@ import java.util.ArrayList;
  */
 public class LoginActivity extends Activity {
 
-    /**
-     * A dummy authentication store containing known user names and passwords.
-     */
-    public static ArrayList<String> DUMMY_CREDENTIALS = new ArrayList<>();
-
-    //Keep track of the login task to ensure we can cancel it if requested.
     private UserLoginTask mAuthTask = null;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
@@ -37,8 +32,7 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        DUMMY_CREDENTIALS.add("foo@example.com:" + "hello".hashCode());
-        DUMMY_CREDENTIALS.add("bar@example.com:" + "world".hashCode());
+        RegisteredUsers.populate();
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -78,7 +72,7 @@ public class LoginActivity extends Activity {
         mPasswordView.setError(null);
 
         String email = mEmailView.getText().toString();
-        String password = "" + mPasswordView.getText().toString().hashCode();
+        String password = "" + mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
@@ -131,25 +125,18 @@ public class LoginActivity extends Activity {
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
-        private final String mPassword;
+        private final String mPasswordHash;
 
-        UserLoginTask(String email, String password) {
+        UserLoginTask(String email, String Password) {
             mEmail = email;
-            mPassword = password;
+            mPasswordHash = "" + Password.hashCode();
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             //authenticating done here.
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-                    return pieces[1].equals(mPassword);
-                }
-            }
-            return false;
+            Person tester = new Person(mEmail, mPasswordHash);
+            return RegisteredUsers.checkMembership(tester);
         }
 
         @Override

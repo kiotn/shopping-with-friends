@@ -24,8 +24,7 @@ public class RegisterActivity extends ActionBarActivity {
         String password = ((TextView) findViewById(R.id.registerPassword)).getText().toString();
 
         String toBeAdded = email + ":" + password.hashCode();
-
-        LoginActivity.DUMMY_CREDENTIALS.add(toBeAdded);
+        RegisteredUsers.registerUser(new Person(email, "" + password.hashCode()));
 
         finish();
     }
