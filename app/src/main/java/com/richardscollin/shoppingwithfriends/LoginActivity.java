@@ -26,30 +26,23 @@ public class LoginActivity extends Activity {
      * A dummy authentication store containing known user names and passwords.
      */
     public static ArrayList<String> DUMMY_CREDENTIALS = new ArrayList<>();
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
-    private UserLoginTask mAuthTask = null;
 
-    // UI references.
-    // UI references.
+    //Keep track of the login task to ensure we can cancel it if requested.
+    private UserLoginTask mAuthTask = null;
     private AutoCompleteTextView mEmailView;
     private EditText mPasswordView;
-    View mProgressView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //populate login info
         DUMMY_CREDENTIALS.add("foo@example.com:" + "hello".hashCode());
         DUMMY_CREDENTIALS.add("bar@example.com:" + "world".hashCode());
 
-        // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-
         mPasswordView = (EditText) findViewById(R.id.password);
+
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -68,7 +61,6 @@ public class LoginActivity extends Activity {
                 attemptLogin();
             }
         });
-        mProgressView = findViewById(R.id.login_progress);
     }
 
     /**
