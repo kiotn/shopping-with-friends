@@ -24,8 +24,7 @@ public class RegisterActivity extends ActionBarActivity {
         String password = ((TextView) findViewById(R.id.registerPassword)).getText().toString();
 
         String toBeAdded = email + ":" + password.hashCode();
-
-        LoginActivity.DUMMY_CREDENTIALS.add(toBeAdded);
+        RegisteredUsers.registerUser(new Person(email, "" + password.hashCode()));
 
         finish();
     }
@@ -37,7 +36,6 @@ public class RegisterActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_register, menu);
         return true;
     }

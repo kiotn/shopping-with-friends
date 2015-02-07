@@ -1,34 +1,26 @@
 package com.richardscollin.shoppingwithfriends;
 
-import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 
-public class HelloActivity extends ActionBarActivity {
+public class Friends extends ActionBarActivity {
+
+    Person user = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hello);
-        TextView hello = (TextView) findViewById(R.id.greeter);
-        Bundle extras = getIntent().getExtras();
-        hello.setText("Hello, " + extras.getString("email"));
-    }
-
-    public void logOut(View v) {
-        finish();
+        setContentView(R.layout.activity_friends);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_hello, menu);
+        getMenuInflater().inflate(R.menu.menu_friends, menu);
         return true;
     }
 
@@ -45,9 +37,5 @@ public class HelloActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    public void launchFriend(View view) {
-        startActivity(new Intent(HelloActivity.this, Friends.class));
     }
 }
