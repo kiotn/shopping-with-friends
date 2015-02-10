@@ -10,7 +10,11 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-
+/**
+ * registration activity
+ *
+ * Team 4
+ */
 public class RegisterActivity extends ActionBarActivity {
 
     @Override
@@ -19,6 +23,10 @@ public class RegisterActivity extends ActionBarActivity {
         setContentView(R.layout.activity_register);
     }
 
+    /**
+     * Method that registers. Converts email and password into strings and creating hashcode per person
+     * @param v View
+     */
     public void register(View v) {
         String email = ((TextView) findViewById(R.id.registerEmail)).getText().toString();
         String password = ((TextView) findViewById(R.id.registerPassword)).getText().toString();
@@ -29,6 +37,10 @@ public class RegisterActivity extends ActionBarActivity {
         finish();
     }
 
+    /**
+     * method that cancels Registration
+     * @param v View
+     */
     public void cancelRegistration(View v) {
         finish();
     }

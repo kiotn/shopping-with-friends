@@ -20,6 +20,11 @@ public class HelloActivity extends ActionBarActivity {
         hello.setText("Hello, " + extras.getString("email"));
     }
 
+    /**
+     * Log the user out.
+     *
+     * @param v
+     */
     public void logOut(View v) {
         finish();
     }
@@ -47,6 +52,11 @@ public class HelloActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * launch the friends activity
+     *
+     * @param view View
+     */
     public void launchFriend(View view) {
         startActivity(new Intent(HelloActivity.this, Friends.class));
     }

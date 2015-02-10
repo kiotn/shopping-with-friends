@@ -113,6 +113,11 @@ public class LoginActivity extends Activity {
         return password.length() > 4;
     }
 
+    /**
+     * Launch the registration activity
+     *
+     * @param v View
+     */
     public void launchRegistration(View v) {
         Intent i = new Intent(LoginActivity.this, RegisterActivity.class);
         startActivity(i);

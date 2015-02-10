@@ -10,6 +10,13 @@ public class FriendList {
 
     private HashSet<Person> friends = new HashSet<>();
 
+    /**
+     * Add a person to the friendlist.
+     *
+     *
+     * @param person to be added
+     * @return True if added. False if already added.
+     */
     public boolean addFriend(Person person) {
         if (checkMembership(person)) {
             return false;
@@ -18,6 +25,12 @@ public class FriendList {
         return true;
     }
 
+
+    /**
+     * Remove a person from friendlist
+     * @param person to be removed
+     * @return True if removed. False if person does not exist.
+     */
     public boolean removeFriend(Person person) {
         if (!checkMembership(person)) {
             return false;
@@ -26,10 +39,20 @@ public class FriendList {
         return true;
     }
 
+    /**
+     * Method that checks if person is contained in friendslist
+     * @param inQuestion to be checked in the system
+     * @return True if inQuestion is contained in friends. False if inQuestion is not contained in friends
+     */
     public boolean checkMembership(Person inQuestion) {
         return friends.contains(inQuestion);
     }
 
+    /**
+     * Method to get friends
+     *
+     * @return array of friends
+     */
     public Person[] toArray() {
         return friends.toArray(new Person[friends.size()]);
     }
