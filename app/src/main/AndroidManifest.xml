@@ -34,6 +34,18 @@
             android:name=".Friends"
             android:label="@string/title_activity_friends" >
         </activity>
+        <activity
+            android:name=".ItemListActivity"
+            android:label="@string/title_item_list" >
+        </activity>
+        <activity
+            android:name=".ItemDetailActivity"
+            android:label="@string/title_item_detail"
+            android:parentActivityName=".ItemListActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.richardscollin.shoppingwithfriends.ItemListActivity" />
+        </activity>
     </application>
 
 </manifest>
