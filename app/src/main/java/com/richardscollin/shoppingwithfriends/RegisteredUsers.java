@@ -48,6 +48,10 @@ public final class RegisteredUsers {
         return false;
     }
 
+    public static HashSet<Person> getUsers() {
+        return users;
+    }
+
     public int getSize() {
         return userSize;
     }
