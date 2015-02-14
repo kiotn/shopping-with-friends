@@ -4,16 +4,29 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.lang.reflect.Array;
 
 
 public class Friends extends ActionBarActivity {
 
     Person user = null;
+    ArrayAdapter<Person> peopleAdapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
+
+
+
+        
+        peopleAdapter.addAll(user.getFriends());
+        ListView friendsList = (ListView) findViewById(R.id.listView);
+        friendsList.setAdapter(peopleAdapter);
     }
 
 

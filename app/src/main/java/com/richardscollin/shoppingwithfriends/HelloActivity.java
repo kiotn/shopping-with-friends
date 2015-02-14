@@ -58,6 +58,6 @@ public class HelloActivity extends ActionBarActivity {
      * @param view View
      */
     public void launchFriend(View view) {
-        startActivity(new Intent(HelloActivity.this, Friends.class));
+        startActivity(new Intent(this, Friends.class));
     }
 }
