@@ -11,6 +11,7 @@ import android.widget.ListView;
 import com.richardscollin.shoppingwithfriends.dummy.DummyContent;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -88,7 +89,8 @@ public class ItemListFragment extends ListFragment {
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                (List) new ArrayList<Person>(RegisteredUsers.getUsers())));
+                (List) Arrays.asList(RegisteredUsers.getCurrentPerson()
+                        .getFriends())));
     }
 
     @Override

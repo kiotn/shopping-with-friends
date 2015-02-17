@@ -151,7 +151,7 @@ public class LoginActivity extends Activity {
 
             if (success) {
                 Intent i = new Intent(LoginActivity.this, HelloActivity.class);
-                i.putExtra("email", mEmail);
+                RegisteredUsers.setCurrentPerson(mEmail);
                 startActivity(i);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

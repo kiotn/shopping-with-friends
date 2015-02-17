@@ -16,8 +16,7 @@ public class HelloActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hello);
         TextView hello = (TextView) findViewById(R.id.greeter);
-        Bundle extras = getIntent().getExtras();
-        hello.setText("Hello, " + extras.getString("email"));
+        hello.setText("Hello, " + RegisteredUsers.getCurrentPerson().getEmail());
     }
 
     /**
@@ -26,6 +25,7 @@ public class HelloActivity extends ActionBarActivity {
      * @param v
      */
     public void logOut(View v) {
+        RegisteredUsers.setCurrentPerson(null);
         finish();
     }
 
