@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -33,6 +34,10 @@ public class RegisterActivity extends ActionBarActivity {
 
         String toBeAdded = email + ":" + password.hashCode();
         RegisteredUsers.registerUser(new Person(email, "" + password.hashCode()));
+
+        Toast toast = Toast.makeText(getApplicationContext(), "Registering user: "
+                + email, Toast.LENGTH_LONG);
+        toast.show();
 
         finish();
     }

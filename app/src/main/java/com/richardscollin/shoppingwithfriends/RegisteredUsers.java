@@ -11,6 +11,10 @@ public final class RegisteredUsers {
     private static int userSize = 0;
     private static Person currentPerson;
 
+    /**
+     * Dummy method to add some users to the app and
+     * setup some friendships.
+     */
     public static void populate() {
         //Create users with a quantity of 6, the number of the beast
         Person p1 = new Person("foo@example.com", "" + "hello".hashCode());
@@ -35,6 +39,11 @@ public final class RegisteredUsers {
 
     }
 
+    /**
+     * This will be the person currently logged in.
+     *
+     * @param email email of the person to be logged in.
+     */
     public static void setCurrentPerson(String email) {
         currentPerson = getPerson(email);
     }
@@ -54,6 +63,11 @@ public final class RegisteredUsers {
         return false;
     }
 
+    /**
+     * Register this person into the app.
+     * @param toAdd Person to add
+     * @return true if added, false if not added.
+     */
     public static boolean registerUser(Person toAdd) {
         if (users.contains(toAdd)) {
             return false;
@@ -63,6 +77,11 @@ public final class RegisteredUsers {
         return true;
     }
 
+    /**
+     * Remove this person from the app.
+     * @param toRemove Person to remove
+     * @return true if removed, false otherwise.
+     */
     public static boolean removeUser(Person toRemove) {
         if (users.contains(toRemove)) {
             users.remove(toRemove);
@@ -72,6 +91,10 @@ public final class RegisteredUsers {
         return false;
     }
 
+    /**
+     * Get the users registered
+     * @return HashSet of the people.
+     */
     public static HashSet<Person> getUsers() {
         return users;
     }
@@ -86,6 +109,10 @@ public final class RegisteredUsers {
         return result;
     }
 
+    /**
+     * Know how many people are registered.
+     * @return int counting users.
+     */
     public int getSize() {
         return userSize;
     }

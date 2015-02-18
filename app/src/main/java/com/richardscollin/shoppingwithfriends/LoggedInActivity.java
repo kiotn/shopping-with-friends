@@ -66,6 +66,10 @@ public class LoggedInActivity extends ActionBarActivity {
         startActivity(new Intent(this, ItemListActivity.class));
     }
 
+    /**
+     * User can add a friend via this method. Fired with the add friend button is clicked.
+     * @param view
+     */
     public void addFriend(View view) {
         TextView text = (TextView) findViewById(R.id.textView);
         String email = text.getText().toString();
