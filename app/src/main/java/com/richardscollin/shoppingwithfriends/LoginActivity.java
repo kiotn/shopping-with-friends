@@ -14,9 +14,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 
 /**
  * A login screen that offers login via email/password.
@@ -150,7 +147,7 @@ public class LoginActivity extends Activity {
             mAuthTask = null;
 
             if (success) {
-                Intent i = new Intent(LoginActivity.this, HelloActivity.class);
+                Intent i = new Intent(LoginActivity.this, LoggedInActivity.class);
                 RegisteredUsers.setCurrentPerson(mEmail);
                 startActivity(i);
             } else {

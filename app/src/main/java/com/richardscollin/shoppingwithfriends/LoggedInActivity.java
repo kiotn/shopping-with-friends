@@ -9,7 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 
-public class HelloActivity extends ActionBarActivity {
+public class LoggedInActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,5 +59,14 @@ public class HelloActivity extends ActionBarActivity {
      */
     public void launchFriend(View view) {
         startActivity(new Intent(this, ItemListActivity.class));
+    }
+
+    public void addFriend(View view) {
+        TextView text = (TextView) findViewById(R.id.textView);
+        String email = text.getText().toString();
+
+        RegisteredUsers.getCurrentPerson().addFriend(
+                RegisteredUsers.getPerson(email)
+        );
     }
 }
