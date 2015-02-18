@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class LoggedInActivity extends ActionBarActivity {
@@ -17,6 +18,8 @@ public class LoggedInActivity extends ActionBarActivity {
         setContentView(R.layout.activity_hello);
         TextView hello = (TextView) findViewById(R.id.greeter);
         hello.setText("Hello, " + RegisteredUsers.getCurrentPerson().getEmail());
+        Toast toast = Toast.makeText(getApplicationContext(), "Logged in",Toast.LENGTH_LONG);
+        toast.show();
     }
 
     /**
@@ -26,6 +29,8 @@ public class LoggedInActivity extends ActionBarActivity {
      */
     public void logOut(View v) {
         RegisteredUsers.setCurrentPerson(null);
+        Toast toast = Toast.makeText(getApplicationContext(), "Logged out", Toast.LENGTH_LONG);
+        toast.show();
         finish();
     }
 
@@ -64,9 +69,15 @@ public class LoggedInActivity extends ActionBarActivity {
     public void addFriend(View view) {
         TextView text = (TextView) findViewById(R.id.textView);
         String email = text.getText().toString();
+        Person toAdd = RegisteredUsers.getPerson(email);
+        if (null == toAdd) {
+            return;
+        }
 
+        Toast toast = Toast.makeText(this, "Adding friend " + email, Toast.LENGTH_LONG);
+        toast.show();
         RegisteredUsers.getCurrentPerson().addFriend(
-                RegisteredUsers.getPerson(email)
+                toAdd
         );
     }
 }
