@@ -22,6 +22,7 @@ public class ItemDetailFragment extends Fragment {
      * represents.
      */
     public static final String ARG_ITEM_ID = "item_id";
+    public int rowID = -1;
 
     /**
      * The dummy content this fragment is presenting.
@@ -44,6 +45,7 @@ public class ItemDetailFragment extends Fragment {
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
             mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            rowID = Integer.parseInt(getArguments().getString(ARG_ITEM_ID));
         }
     }
 
@@ -53,8 +55,12 @@ public class ItemDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
         // Show the dummy content as text in a TextView.
+        //Here's where the text is loaded.!!!!!
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+            ((TextView) rootView.findViewById(R.id.item_detail)).setText(
+                    RegisteredUsers.getCurrentPerson().getFriends()[rowID - 1].getEmail()
+            );
         }
 
         return rootView;

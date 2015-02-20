@@ -75,13 +75,29 @@ public class LoggedInActivity extends ActionBarActivity {
         String email = text.getText().toString();
         Person toAdd = RegisteredUsers.getPerson(email);
         if (null == toAdd) {
+            Toast.makeText(getApplicationContext(),
+                    "user doesn't exist", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Toast toast = Toast.makeText(this, "Adding friend " + email, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), "Adding friend " + email, Toast.LENGTH_LONG);
         toast.show();
         RegisteredUsers.getCurrentPerson().addFriend(
                 toAdd
         );
+    }
+
+    public void removeFriend(View view) {
+        TextView text = (TextView) findViewById(R.id.textView);
+        String email = text.getText().toString();
+        Person toRemove = RegisteredUsers.getPerson(email);
+
+        if (null == toRemove) {
+            Toast.makeText(getApplicationContext(),
+                    "user doesn't exist", Toast.LENGTH_LONG).show();
+            return;
+        }
+        Toast.makeText(getApplicationContext(), "Removing friend " + email, Toast.LENGTH_LONG).show();
+        RegisteredUsers.getCurrentPerson().removeFriend(toRemove);
     }
 }
