@@ -138,7 +138,7 @@ public class LoginActivity extends Activity {
         @Override
         protected Boolean doInBackground(Void... params) {
             //authenticating done here.
-            Person tester = new Person(mEmail, mPasswordHash);
+            Person tester = new Person(null, mEmail, mPasswordHash);
             return RegisteredUsers.checkMembership(tester);
         }
 

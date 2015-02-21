@@ -54,12 +54,20 @@ public class ItemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
+        Person person = RegisteredUsers.getCurrentPerson().getFriends()[rowID - 1];
+
         // Show the dummy content as text in a TextView.
         //Here's where the text is loaded.!!!!!
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
             ((TextView) rootView.findViewById(R.id.item_detail)).setText(
-                    RegisteredUsers.getCurrentPerson().getFriends()[rowID - 1].getEmail()
+                    "###############\n" +
+                    person.getName() + "\n" +
+                    "###############\n" +
+                    person.getEmail() + "\n" +
+                    "###############\n" +
+                    "Rating: " + person.getRating() + "\n###############\n" +
+                    person.getSales()
             );
         }
 

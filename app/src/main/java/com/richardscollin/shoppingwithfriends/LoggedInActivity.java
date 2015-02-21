@@ -15,9 +15,9 @@ public class LoggedInActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_hello);
+        setContentView(R.layout.activity_logged_in);
         TextView hello = (TextView) findViewById(R.id.greeter);
-        hello.setText("Hello, " + RegisteredUsers.getCurrentPerson().getEmail());
+        hello.setText("Hello, " + RegisteredUsers.getCurrentPerson().getName());
         Toast toast = Toast.makeText(getApplicationContext(), "Logged in",Toast.LENGTH_LONG);
         toast.show();
     }
@@ -99,5 +99,10 @@ public class LoggedInActivity extends ActionBarActivity {
         }
         Toast.makeText(getApplicationContext(), "Removing friend " + email, Toast.LENGTH_LONG).show();
         RegisteredUsers.getCurrentPerson().removeFriend(toRemove);
+    }
+
+    public void launchSale(View view) {
+        Intent intent = new Intent(this, RegisterSale.class);
+        startActivity(intent);
     }
 }

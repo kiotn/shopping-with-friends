@@ -7,9 +7,13 @@ import java.util.HashSet;
  */
 public class Person {
 
+    private String name;
     private String email;
     private String passwordHash;
     private FriendList friends;
+    private int rating;
+    private int ratingWeight;
+    private HashSet<Sale> sales;
 
 
     /**
@@ -18,10 +22,20 @@ public class Person {
      * @param email email of user
      * @param passwordHash hash of password to log in
      */
-    public Person(String email, String passwordHash) {
+    public Person(String name, String email, String passwordHash) {
+        this.name = name;
         this.email = email;
         this.passwordHash = passwordHash;
         friends = new FriendList();
+        sales = new HashSet<>();
+    }
+
+    /**
+     * Get the name
+     * @return the name
+     */
+    public String getName() {
+        return name;
     }
 
     /**
@@ -39,6 +53,16 @@ public class Person {
      */
     public String getPasswordHash() {
         return passwordHash;
+    }
+
+    public void giveRating(int num) {
+        int total = rating * ratingWeight + num;
+        ratingWeight += 1;
+        rating = total / ratingWeight;
+    }
+
+    public int getRating() {
+        return rating;
     }
 
     /**
@@ -67,6 +91,18 @@ public class Person {
         friends.removeFriend(person);
     }
 
+    public void registerSale (String name, double cost, String location) {
+        sales.add(new Sale(name, cost, location));
+    }
+
+    public String getSales() {
+        String result = "";
+        for (Sale i : sales) {
+            result += i.toString() + "\n";
+        }
+        return result;
+    }
+
     /**
      * Method that gets the array of friends
      * @return array of friends
@@ -75,10 +111,34 @@ public class Person {
         return friends.toArray();
     }
 
+    private class Sale {
+        private double cost;
+        private String name;
+        private String location;
+
+        public Sale(String name, double cost, String location) {
+            this.name = name;
+            this.cost = cost;
+            this.location = location;
+        }
+
+        @Override
+        public String toString() {
+            String result = "";
+            result += name;
+            result += " at $";
+            result += cost;
+            result += "\n\t at ";
+            result += location;
+            return result;
+        }
+
+    }
+
     /**
      * Created by John on 2/6/2015.
      */
-    public static class FriendList {
+    private class FriendList {
 
         private HashSet<Person> friends = new HashSet<>();
 

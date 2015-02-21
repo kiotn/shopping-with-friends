@@ -21,7 +21,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/registerPassword"
-        android:layout_alignEnd="@+id/registerPassword" />
+        android:layout_alignEnd="@+id/registerPassword"
+        android:hint="email" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -33,7 +34,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/button3"
-        android:layout_alignEnd="@+id/button3" />
+        android:layout_alignEnd="@+id/button3"
+        android:hint="password" />
 
     <Button
         android:layout_width="wrap_content"
@@ -54,5 +56,17 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="cancelRegistration" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/registerName"
+        android:layout_below="@+id/registerPassword"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignRight="@+id/registerPassword"
+        android:layout_alignEnd="@+id/registerPassword"
+        android:autoText="false"
+        android:hint="name" />
 
 </RelativeLayout>

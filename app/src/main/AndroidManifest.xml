@@ -46,6 +46,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.richardscollin.shoppingwithfriends.ItemListActivity" />
         </activity>
+        <activity
+            android:name=".RegisterSale"
+            android:label="@string/title_activity_register_sale" >
+        </activity>
     </application>
 
 </manifest>

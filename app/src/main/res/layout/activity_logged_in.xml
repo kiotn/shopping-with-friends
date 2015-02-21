@@ -54,14 +54,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="email"
         android:ems="10"
         android:id="@+id/textView"
         android:layout_below="@+id/button5"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/button5"
-        android:layout_alignEnd="@+id/button5" />
+        android:layout_alignEnd="@+id/button5"
+        android:hint="email to add/ remove" />
 
     <Button
         android:layout_width="wrap_content"
@@ -72,5 +72,15 @@
         android:layout_alignRight="@+id/textView"
         android:layout_alignEnd="@+id/textView"
         android:onClick="removeFriend" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Register A Sale"
+        android:id="@+id/button9"
+        android:layout_alignTop="@+id/button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:onClick="launchSale" />
 
 </RelativeLayout>

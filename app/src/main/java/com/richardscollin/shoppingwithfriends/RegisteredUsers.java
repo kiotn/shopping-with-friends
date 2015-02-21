@@ -17,12 +17,12 @@ public final class RegisteredUsers {
      */
     public static void populate() {
         //Create users with a quantity of 6, the number of the beast
-        Person p1 = new Person("foo@example.com", "" + "hello".hashCode());
-        Person p2 = new Person("test@gatech.edu", "" + "world".hashCode());
-        Person p3 = new Person("icecube@gmail.com", "" + "speaking".hashCode());
-        Person p4 = new Person("tennisplayer@yahoo.com", "" + "from the".hashCode());
-        Person p5 = new Person("nigerianprince@scam.org", "" + "planet".hashCode());
-        Person p6 = new Person("evenbiggerscam@itttech.edu", "" + "jupiter".hashCode());
+        Person p1 = new Person("George Burdell", "foo@example.com", "" + "hello".hashCode());
+        Person p2 = new Person("Bob Jones", "test@gatech.edu", "" + "world".hashCode());
+        Person p3 = new Person("Donald Knith", "icecube@gmail.com", "" + "speaking".hashCode());
+        Person p4 = new Person("Richard Feynmen", "tennisplayer@yahoo.com", "" + "from the".hashCode());
+        Person p5 = new Person("Alan Turang", "nigerianprince@scam.org", "" + "planet".hashCode());
+        Person p6 = new Person("Ronald McDonald", "evenbiggerscam@itttech.edu", "" + "jupiter".hashCode());
         //register them
         users.add(p1);
         users.add(p2);
@@ -35,6 +35,16 @@ public final class RegisteredUsers {
         p6.addFriend(p5);
         p1.addFriend(p2);
         p1.addFriend(p5);
+
+        //Add some sales
+        p1.registerSale("Laptop", 535.54, "Best Buy");
+        p1.registerSale("Dress Shirt", 30.05, "Costco");
+        p1.registerSale("Pilot Pens", 12.65, "Staples");
+        p3.registerSale("Ice Tray", 1.99, "Home Depot");
+        p4.registerSale("Tennis Balls", 21.99, "Sports  Authority");
+        p4.registerSale("Tennis Shoes", 49.99, "Tennis Warehouse");
+        p5.registerSale("My Investment", 3500.00, "Africa");
+        p6.registerSale("2 year associates", 60000.99, "ITT Tech");
 
 
     }
