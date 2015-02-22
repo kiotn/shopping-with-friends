@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,6 +22,11 @@ public class LoggedInActivity extends ActionBarActivity {
         hello.setText("Hello, " + RegisteredUsers.getCurrentPerson().getName());
         Toast toast = Toast.makeText(getApplicationContext(), "Logged in",Toast.LENGTH_LONG);
         toast.show();
+
+        ArrayAdapter<Person> nameAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, RegisteredUsers.getUsers().toArray());
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        spinner.setAdapter(nameAdapter);
+
     }
 
     /**
@@ -71,16 +78,16 @@ public class LoggedInActivity extends ActionBarActivity {
      * @param view
      */
     public void addFriend(View view) {
-        TextView text = (TextView) findViewById(R.id.textView);
-        String email = text.getText().toString();
-        Person toAdd = RegisteredUsers.getPerson(email);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        String name = spinner.getSelectedItem().toString();
+        Person toAdd = RegisteredUsers.getPerson(name);
         if (null == toAdd) {
             Toast.makeText(getApplicationContext(),
                     "user doesn't exist", Toast.LENGTH_LONG).show();
             return;
         }
 
-        Toast toast = Toast.makeText(getApplicationContext(), "Adding friend " + email, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), "Adding friend " + name, Toast.LENGTH_LONG);
         toast.show();
         RegisteredUsers.getCurrentPerson().addFriend(
                 toAdd
@@ -88,16 +95,16 @@ public class LoggedInActivity extends ActionBarActivity {
     }
 
     public void removeFriend(View view) {
-        TextView text = (TextView) findViewById(R.id.textView);
-        String email = text.getText().toString();
-        Person toRemove = RegisteredUsers.getPerson(email);
+        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        String name = spinner.getSelectedItem().toString();
+        Person toRemove = RegisteredUsers.getPerson(name);
 
         if (null == toRemove) {
             Toast.makeText(getApplicationContext(),
                     "user doesn't exist", Toast.LENGTH_LONG).show();
             return;
         }
-        Toast.makeText(getApplicationContext(), "Removing friend " + email, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), "Removing friend " + name, Toast.LENGTH_LONG).show();
         RegisteredUsers.getCurrentPerson().removeFriend(toRemove);
     }
 

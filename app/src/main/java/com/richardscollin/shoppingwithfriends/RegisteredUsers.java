@@ -55,7 +55,7 @@ public final class RegisteredUsers {
      * @param email email of the person to be logged in.
      */
     public static void setCurrentPerson(String email) {
-        currentPerson = getPerson(email);
+        currentPerson = getPerson(0, email);
     }
 
     public static Person getCurrentPerson() {
@@ -109,10 +109,20 @@ public final class RegisteredUsers {
         return users;
     }
 
-    public static Person getPerson(String email) {
+    public static Person getPerson(int notUsed, String email) {
         Person result = null;
         for (Person i : users) {
             if (i.getEmail().equals(email)) {
+                result = i;
+            }
+        }
+        return result;
+    }
+
+    public static Person getPerson(String name) {
+        Person result = null;
+        for (Person i : users) {
+            if (i.getName().equals(name)) {
                 result = i;
             }
         }

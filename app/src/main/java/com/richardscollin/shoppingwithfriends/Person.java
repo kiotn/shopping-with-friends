@@ -70,7 +70,7 @@ public class Person {
      * @return string of email
      */
     public String toString() {
-        return getEmail();
+        return getName();
     }
 
     /**
