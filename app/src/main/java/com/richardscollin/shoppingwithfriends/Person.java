@@ -80,6 +80,7 @@ public class Person {
     public void addFriend(Person person) {
         //person.addFriend(this);
         friends.addFriend(person);
+        RegisteredUsers.saveData();
     }
 
     /**
@@ -89,10 +90,12 @@ public class Person {
     public void removeFriend(Person person) {
         //person.removeFriend(this);
         friends.removeFriend(person);
+        RegisteredUsers.saveData();
     }
 
     public void registerSale (String name, double cost, String location) {
         sales.add(new Sale(name, cost, location));
+        RegisteredUsers.saveData();
     }
 
     public String getSales() {

@@ -1,16 +1,10 @@
 package com.richardscollin.shoppingwithfriends;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
-import android.graphics.drawable.shapes.PathShape;
-
 import com.google.gson.Gson;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -98,6 +92,7 @@ public final class RegisteredUsers {
         }
         users.add(toAdd);
         userSize++;
+        saveData();
         return true;
     }
 
@@ -110,6 +105,7 @@ public final class RegisteredUsers {
         if (users.contains(toRemove)) {
             users.remove(toRemove);
             userSize--;
+            saveData();
             return true;
         }
         return false;
