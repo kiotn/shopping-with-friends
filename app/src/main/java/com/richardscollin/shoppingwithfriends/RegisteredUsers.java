@@ -1,5 +1,19 @@
 package com.richardscollin.shoppingwithfriends;
 
+import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
+import android.graphics.drawable.shapes.PathShape;
+
+import com.google.gson.Gson;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashSet;
 
 /**
@@ -10,6 +24,8 @@ public final class RegisteredUsers {
     private static HashSet<Person> users = new HashSet<>();
     private static int userSize = 0;
     private static Person currentPerson;
+    private static Context context;
+    private static HashSet jsonStrings = new HashSet();
 
     /**
      * Dummy method to add some users to the app and
@@ -45,8 +61,6 @@ public final class RegisteredUsers {
         p4.registerSale("Tennis Shoes", 49.99, "Tennis Warehouse");
         p5.registerSale("My Investment", 3500.00, "Africa");
         p6.registerSale("2 year associates", 60000.99, "ITT Tech");
-
-
     }
 
     /**
@@ -101,6 +115,10 @@ public final class RegisteredUsers {
         return false;
     }
 
+    public static void setUsers(HashSet<Person> userset) {
+        users = userset;
+    }
+
     /**
      * Get the users registered
      * @return HashSet of the people.
@@ -127,6 +145,55 @@ public final class RegisteredUsers {
             }
         }
         return result;
+    }
+
+    public static void setContext(Context context) {
+        RegisteredUsers.context = context;
+    }
+
+    public static boolean saveData() {
+        Gson gson = new Gson();
+        jsonStrings = new HashSet();
+
+
+        //load up the jsons into jsonStrings
+        for (Person i : users) {
+            jsonStrings.add(gson.toJson(i));
+        }
+        //load up this object into a json
+        String cumulativeData = gson.toJson(jsonStrings);
+        //write data to device.
+        File file = new File(context.getFilesDir(), "appData");
+        try {
+            FileWriter fileWriter = new FileWriter(file);
+            fileWriter.write(cumulativeData);
+            fileWriter.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean readData() {
+        Gson gson = new Gson();
+        users = new HashSet<>();
+
+
+        //load up hashset from memory
+        try {
+            jsonStrings = gson.fromJson(new BufferedReader(
+                    new FileReader(new File(context.getFilesDir(), "appData"))
+                    ), HashSet.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+        //go through each string in the hashset, and create a user for each one.
+        for (Object i : jsonStrings) {
+            users.add((Person) gson.fromJson((String) i, Person.class));
+        }
+        return true;
     }
 
     /**
