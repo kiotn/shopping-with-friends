@@ -27,7 +27,7 @@ public class ItemDetailFragment extends Fragment {
     /**
      * The dummy content this fragment is presenting.
      */
-    private DummyContent.DummyItem mItem;
+    private Person mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -44,7 +44,9 @@ public class ItemDetailFragment extends Fragment {
             // Load the dummy content specified by the fragment
             // arguments. In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
+            mItem = RegisteredUsers.getCurrentPerson().getFriends()[
+                    Integer.parseInt(getArguments().getString(ARG_ITEM_ID))];
+            //mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
             rowID = Integer.parseInt(getArguments().getString(ARG_ITEM_ID));
         }
     }
@@ -54,12 +56,13 @@ public class ItemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
-        Person person = RegisteredUsers.getCurrentPerson().getFriends()[rowID - 1];
+        Person person = mItem;
+        //Person person = RegisteredUsers.getCurrentPerson().getFriends()[rowID - 1];
 
         // Show the dummy content as text in a TextView.
         //Here's where the text is loaded.!!!!!
         if (mItem != null) {
-            ((TextView) rootView.findViewById(R.id.item_detail)).setText(mItem.content);
+            ((TextView) rootView.findViewById(R.id.item_detail)).setText("mItem.content");
             ((TextView) rootView.findViewById(R.id.item_detail)).setText(
                     "###############\n" +
                     person.getName() + "\n" +

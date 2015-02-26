@@ -130,7 +130,8 @@ public class ItemListFragment extends ListFragment {
 
         // Notify the active callbacks interface (the activity, if the
         // fragment is attached to one) that an item has been selected.
-        mCallbacks.onItemSelected(DummyContent.ITEMS.get(position).id);
+        mCallbacks.onItemSelected("" + position);
+        //mCallbacks.onItemSelected(DummyContent.ITEMS.get(position % 3).id);
     }
 
     @Override

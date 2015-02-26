@@ -29,9 +29,9 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        //RegisteredUsers.populate();
+        RegisteredUsers.populate();
         RegisteredUsers.setContext(getApplicationContext());
-        RegisteredUsers.readData();
+        //RegisteredUsers.readData();
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
