@@ -13,7 +13,7 @@ public class Person {
     private FriendList friends;
     private int rating;
     private int ratingWeight;
-    private HashSet<Sale> sales;
+    private HashSet<Interest> interests;
 
 
     /**
@@ -27,7 +27,7 @@ public class Person {
         this.email = email;
         this.passwordHash = passwordHash;
         friends = new FriendList();
-        sales = new HashSet<>();
+        interests = new HashSet<>();
     }
 
     /**
@@ -55,12 +55,22 @@ public class Person {
         return passwordHash;
     }
 
+    /**
+     * Give a rating to the user. Naive way of doing it, but it does weigh the ratings based on how
+     * many rating there currently are.
+     * @param num rating to give.
+     */
     public void giveRating(int num) {
         int total = rating * ratingWeight + num;
         ratingWeight += 1;
         rating = total / ratingWeight;
+        RegisteredUsers.saveData();
     }
 
+    /**
+     * Get this users rating
+     * @return rating
+     */
     public int getRating() {
         return rating;
     }
@@ -78,9 +88,11 @@ public class Person {
      * @param person
      */
     public void addFriend(Person person) {
-        //person.addFriend(this);
+        if (friends.checkMembership(person)) {
+            return;
+        }
         friends.addFriend(person);
-        //RegisteredUsers.saveData();
+        RegisteredUsers.saveData();
     }
 
     /**
@@ -88,21 +100,49 @@ public class Person {
      * @param person
      */
     public void removeFriend(Person person) {
-        //person.removeFriend(this);
         friends.removeFriend(person);
-        //RegisteredUsers.saveData();
+        RegisteredUsers.saveData();
     }
 
-    public void registerSale (String name, double cost, String location) {
-        sales.add(new Sale(name, cost, location));
-        //RegisteredUsers.saveData();
+    /**
+     * Register a sale
+     * @param name name of item
+     * @param cost cost of item
+     */
+    public void registerInterest (String name, double cost) {
+        interests.add(new Interest(name, cost));
+        RegisteredUsers.saveData();
     }
 
-    public String getSales() {
-        String result = "";
-        for (Sale i : sales) {
+    /**
+     * Get a string representation of the sales set
+     * @return string printout of the sales.
+     */
+    public String getInterests() {
+        String result = "---N Interests: " + interests.size() + "---\n";
+        for (Interest i : interests) {
             result += i.toString() + "\n";
         }
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Person person = (Person) o;
+
+        if (!email.equals(person.email)) return false;
+        if (!name.equals(person.name)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + email.hashCode();
         return result;
     }
 
@@ -114,25 +154,47 @@ public class Person {
         return friends.toArray();
     }
 
-    private class Sale {
+
+
+    private class Interest {
         private double cost;
         private String name;
-        private String location;
 
-        public Sale(String name, double cost, String location) {
+        public Interest(String name, double cost) {
             this.name = name;
             this.cost = cost;
-            this.location = location;
         }
 
         @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Interest interest = (Interest) o;
+
+            if (Double.compare(interest.cost, cost) != 0) return false;
+            if (!name.equals(interest.name)) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result;
+            long temp;
+            temp = Double.doubleToLongBits(cost);
+            result = (int) (temp ^ (temp >>> 32));
+            result = 31 * result + name.hashCode();
+            return result;
+        }
+
+        @Override
+
         public String toString() {
             String result = "";
             result += name;
             result += " at $";
             result += cost;
-            result += "\n\t at ";
-            result += location;
             return result;
         }
 
@@ -168,9 +230,10 @@ public class Person {
          */
         public boolean removeFriend(Person person) {
             if (!checkMembership(person)) {
-                return false;
+                //return false;
             }
             friends.remove(person);
+            RegisteredUsers.saveData();
             return true;
         }
 

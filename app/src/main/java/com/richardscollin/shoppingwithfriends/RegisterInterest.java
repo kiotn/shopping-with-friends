@@ -5,16 +5,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 
-public class RegisterSale extends ActionBarActivity {
+public class RegisterInterest extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_sale);
+        setContentView(R.layout.activity_register_interest);
     }
 
 
@@ -40,16 +39,19 @@ public class RegisterSale extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void RegisterSale (View view) {
+    /**
+     * Register this sale to the current person.
+     * @param view
+     */
+    public void RegisterInterest(View view) {
         TextView itemView = (TextView) findViewById(R.id.editItem);
-        EditText locationView = (EditText) findViewById(R.id.editLocation);
         TextView priceView = (TextView) findViewById(R.id.editPrice);
 
-        RegisteredUsers.getCurrentPerson().registerSale(
+        RegisteredUsers.getCurrentPerson().registerInterest(
                 "" + itemView.getText(),
-                Double.parseDouble("" + priceView.getText()),
-                "" + locationView.getText()
+                Double.parseDouble("" + priceView.getText())
         );
+        RegisteredUsers.saveData();
         finish();
     }
 }

@@ -62,12 +62,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register A Sale"
+        android:text="Register Interest"
         android:id="@+id/button9"
         android:layout_alignTop="@+id/button"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:onClick="launchSale" />
+        android:onClick="launchInterest" />
 
     <Spinner
         android:layout_width="wrap_content"

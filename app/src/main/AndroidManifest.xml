@@ -47,7 +47,7 @@
                 android:value="com.richardscollin.shoppingwithfriends.ItemListActivity" />
         </activity>
         <activity
-            android:name=".RegisterSale"
+            android:name=".RegisterInterest"
             android:label="@string/title_activity_register_sale" >
         </activity>
     </application>

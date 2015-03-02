@@ -83,17 +83,36 @@ public class LoggedInActivity extends ActionBarActivity {
         Person toAdd = RegisteredUsers.getPerson(name);
         if (null == toAdd) {
             Toast.makeText(getApplicationContext(),
-                    "user doesn't exist", Toast.LENGTH_LONG).show();
+                    "user doesn't exist", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (toAdd.getName().equals(RegisteredUsers.getCurrentPerson().getName())) {
+            Toast.makeText(getApplicationContext(),
+                    "Can't add yourself!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        boolean isInFriends = false;
+        for (Person i : RegisteredUsers.getCurrentPerson().getFriends()) {
+            if (i.getName().equals(toAdd.getName())) {
+                isInFriends = true;
+            }
+        }
+        if (isInFriends) {
+            Toast.makeText(getApplicationContext(),
+                    "user is already in friends", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Toast toast = Toast.makeText(getApplicationContext(), "Adding friend " + name, Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), "Adding friend " + name, Toast.LENGTH_SHORT);
         toast.show();
         RegisteredUsers.getCurrentPerson().addFriend(
                 toAdd
         );
     }
 
+    /**
+     * Button fires this method. Removes the user pointed at by the spinner.
+     * @param view
+     */
     public void removeFriend(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         String name = spinner.getSelectedItem().toString();
@@ -101,15 +120,35 @@ public class LoggedInActivity extends ActionBarActivity {
 
         if (null == toRemove) {
             Toast.makeText(getApplicationContext(),
-                    "user doesn't exist", Toast.LENGTH_LONG).show();
+                    "user doesn't exist", Toast.LENGTH_SHORT).show();
+            return;
+        } else if (toRemove.getName().equals(RegisteredUsers.getCurrentPerson().getName())) {
+            Toast.makeText(getApplicationContext(),
+                    "Can't remove yourself!", Toast.LENGTH_SHORT).show();
             return;
         }
-        Toast.makeText(getApplicationContext(), "Removing friend " + name, Toast.LENGTH_LONG).show();
+        boolean isInFriends = false;
+        for (Person i : RegisteredUsers.getCurrentPerson().getFriends()) {
+            if (i.getName().equals(toRemove.getName())) {
+                isInFriends = true;
+            }
+        }
+        if (!isInFriends) {
+            Toast.makeText(getApplicationContext(),
+                    "user is already not in friends", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Toast.makeText(getApplicationContext(), "Removing friend " + name, Toast.LENGTH_SHORT).show();
         RegisteredUsers.getCurrentPerson().removeFriend(toRemove);
     }
 
-    public void launchSale(View view) {
-        Intent intent = new Intent(this, RegisterSale.class);
+    /**
+     * Fired by button. Launches activity for the logged in user to write a sale.
+     * @param view
+     */
+    public void launchInterest(View view) {
+        Intent intent = new Intent(this, RegisterInterest.class);
         startActivity(intent);
     }
 }

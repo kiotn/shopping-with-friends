@@ -7,9 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-
-import com.richardscollin.shoppingwithfriends.dummy.DummyContent;
-
 /**
  * A fragment representing a single Item detail screen.
  * This fragment is either contained in a {@link ItemListActivity}
@@ -23,10 +20,6 @@ public class ItemDetailFragment extends Fragment {
      */
     public static final String ARG_ITEM_ID = "item_id";
     public int rowID = -1;
-
-    /**
-     * The dummy content this fragment is presenting.
-     */
     private Person mItem;
 
     /**
@@ -41,12 +34,10 @@ public class ItemDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
-            // Load the dummy content specified by the fragment
-            // arguments. In a real-world scenario, use a Loader
+            // In a real-world scenario, use a Loader
             // to load content from a content provider.
             mItem = RegisteredUsers.getCurrentPerson().getFriends()[
                     Integer.parseInt(getArguments().getString(ARG_ITEM_ID))];
-            //mItem = DummyContent.ITEM_MAP.get(getArguments().getString(ARG_ITEM_ID));
             rowID = Integer.parseInt(getArguments().getString(ARG_ITEM_ID));
         }
     }
@@ -57,9 +48,8 @@ public class ItemDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
         Person person = mItem;
+        person = RegisteredUsers.getPerson(mItem.getName());
         //Person person = RegisteredUsers.getCurrentPerson().getFriends()[rowID - 1];
-
-        // Show the dummy content as text in a TextView.
         //Here's where the text is loaded.!!!!!
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.item_detail)).setText("mItem.content");
@@ -70,7 +60,7 @@ public class ItemDetailFragment extends Fragment {
                     person.getEmail() + "\n" +
                     "###############\n" +
                     "Rating: " + person.getRating() + "\n###############\n" +
-                    person.getSales()
+                    person.getInterests()
             );
         }
 

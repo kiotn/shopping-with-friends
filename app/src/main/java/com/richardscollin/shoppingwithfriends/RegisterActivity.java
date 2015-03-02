@@ -33,13 +33,12 @@ public class RegisterActivity extends ActionBarActivity {
         String password = ((TextView) findViewById(R.id.registerPassword)).getText().toString();
         String name = ((TextView) findViewById(R.id.registerName)).getText().toString();
 
-        String toBeAdded = email + ":" + password.hashCode();
         RegisteredUsers.registerUser(new Person(name, email, "" + password.hashCode()));
 
         Toast toast = Toast.makeText(getApplicationContext(), "Registering user: "
                 + email, Toast.LENGTH_LONG);
         toast.show();
-
+        RegisteredUsers.saveData();
         finish();
     }
 
