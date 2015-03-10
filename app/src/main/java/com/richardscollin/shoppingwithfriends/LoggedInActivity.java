@@ -20,7 +20,7 @@ public class LoggedInActivity extends ActionBarActivity {
         setContentView(R.layout.activity_logged_in);
         TextView hello = (TextView) findViewById(R.id.greeter);
         hello.setText("Hello, " + RegisteredUsers.getCurrentPerson().getName());
-        Toast toast = Toast.makeText(getApplicationContext(), "Logged in",Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), "Logged in",Toast.LENGTH_SHORT);
         toast.show();
 
         ArrayAdapter<Person> nameAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, RegisteredUsers.getUsers().toArray());
@@ -36,7 +36,7 @@ public class LoggedInActivity extends ActionBarActivity {
      */
     public void logOut(View v) {
         RegisteredUsers.setCurrentPerson(null);
-        Toast toast = Toast.makeText(getApplicationContext(), "Logged out", Toast.LENGTH_LONG);
+        Toast toast = Toast.makeText(getApplicationContext(), "Logged out", Toast.LENGTH_SHORT);
         toast.show();
         finish();
     }
@@ -144,11 +144,16 @@ public class LoggedInActivity extends ActionBarActivity {
     }
 
     /**
-     * Fired by button. Launches activity for the logged in user to write a sale.
+     * Fired by button. Launches activity for the logged in user to write an interest.
      * @param view
      */
     public void launchInterest(View view) {
         Intent intent = new Intent(this, RegisterInterest.class);
+        startActivity(intent);
+    }
+
+    public void reportSale(View view) {
+        Intent intent = new Intent(this,SalesReportActivity.class);
         startActivity(intent);
     }
 }

@@ -4,23 +4,21 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.TextView;
 
 
-public class RegisterInterest extends ActionBarActivity {
+public class SalesReportActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_interest);
+        setContentView(R.layout.activity_sales_report);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_register_sale, menu);
+        getMenuInflater().inflate(R.menu.menu_sales_report, menu);
         return true;
     }
 
@@ -38,22 +36,4 @@ public class RegisterInterest extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
-    /**
-     * Register this sale to the current person.
-     * @param view view
-     */
-    public void RegisterInterest(View view) {
-        TextView itemView = (TextView) findViewById(R.id.editItem);
-        TextView priceView = (TextView) findViewById(R.id.editPrice);
-
-        RegisteredUsers.getCurrentPerson().registerInterest(
-                "" + itemView.getText(),
-                Double.parseDouble("" + priceView.getText())
-        );
-        RegisteredUsers.saveData();
-        finish();
-    }
-
-
 }

@@ -50,6 +50,10 @@
             android:name=".RegisterInterest"
             android:label="@string/title_activity_register_sale" >
         </activity>
+        <activity
+            android:name=".SalesReportActivity"
+            android:label="@string/title_activity_sales_report" >
+        </activity>
     </application>
 
 </manifest>
