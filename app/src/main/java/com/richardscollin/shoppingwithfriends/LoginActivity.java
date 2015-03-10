@@ -104,10 +104,20 @@ public class LoginActivity extends Activity {
 
     }
 
+    /**
+     * check if an email is a valid email
+     * @param email String to check.
+     * @return true if valid, false otherwise.
+     */
     private boolean isEmailValid(String email) {
         return email.contains("@");
     }
 
+    /**
+     * Check is a password is valid.
+     * @param password String to check.
+     * @return true if valid.
+     */
     private boolean isPasswordValid(String password) {
         return password.length() > 4;
     }

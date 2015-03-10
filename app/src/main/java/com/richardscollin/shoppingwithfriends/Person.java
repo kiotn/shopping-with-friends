@@ -177,10 +177,13 @@ public class Person {
         return friends.toArray();
     }
 
+    /**
+     * Get the sales.
+     * @return HashSet of the sales.
+     */
     public HashSet<Sale> getSales() {
         return sales;
     }
-
 
 
     public class Interest {
@@ -188,15 +191,28 @@ public class Person {
         private double cost;
         private String name;
 
+        /**
+         * Constructor.
+         * @param name Name of item the user wants.
+         * @param cost Cost of the item the user wants.
+         */
         public Interest(String name, double cost) {
             this.name = name;
             this.cost = cost;
         }
 
+        /**
+         * Get the cost of this interest.
+         * @return the cost of this interset.
+         */
         public double getCost() {
             return cost;
         }
 
+        /**
+         * Get the cost of this interest.
+         * @return the cost of this interest.
+         */
         public String getName() {
             return name;
         }
@@ -225,6 +241,9 @@ public class Person {
 
         @Override
 
+        /**
+         * Get the string representation of this item.
+         */
         public String toString() {
             String result = "";
             result += name;
@@ -239,6 +258,7 @@ public class Person {
      * Created by John on 2/6/2015.
      */
     private class FriendList {
+
 
         private HashSet<Person> friends = new HashSet<>();
 
@@ -297,20 +317,38 @@ public class Person {
         String location;
         double price;
 
+        /**
+         * Constructor.
+         * @param itemName name of item
+         * @param location place of item sale
+         * @param price price of item sale
+         */
         public Sale(String itemName, String location, double price){
             this.itemName = itemName;
             this.location = location;
             this.price = price;
         }
 
+        /**
+         * Get the item name.
+         * @return the item name.
+         */
         public String getItemName() {
             return itemName;
         }
 
+        /**
+         * Get the location of the sale
+         * @return the location
+         */
         public String getLocation() {
             return location;
         }
 
+        /**
+         * Get the price of the item of this sale.
+         * @return the price
+         */
         public double getPrice() {
             return price;
         }
@@ -340,6 +378,10 @@ public class Person {
             return result;
         }
 
+        /**
+         * get a string representation of this item.
+         * @return the String representation of this item.
+         */
         public String toString() {
             String result = "";
             result += itemName;

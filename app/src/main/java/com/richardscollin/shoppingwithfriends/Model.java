@@ -154,6 +154,11 @@ public final class Model {
         return result;
     }
 
+    /**
+     * Get a person by their name
+     * @param name name of the person such as "George Burdell"
+     * @return the Person with this name. Null if no exist.
+     */
     public static Person getPerson(String name) {
         Person result = null;
         for (Person i : users) {

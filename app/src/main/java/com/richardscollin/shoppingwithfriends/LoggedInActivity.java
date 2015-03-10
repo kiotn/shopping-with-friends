@@ -33,12 +33,18 @@ public class LoggedInActivity extends ActionBarActivity {
 
     }
 
+    /**
+     * Method to look into other friends' sale list and report if there is a match.
+     * The method will pop up a toast message to the user notifying them of the user and the item for
+     * which there is a match. The user can then go into the friends list and view the sale.
+     */
     public void processMatches() {
+        //No indents to hide how bad this is.
         for (Person.Interest interest : Model.getCurrentPerson().getInterests()) {
-            for (Person friend : Model.getCurrentPerson().getFriends()) {
+        for (Person friend : Model.getCurrentPerson().getFriends()) {
                 Toast.makeText(this, "size: " + friend.getSales().size(), Toast.LENGTH_SHORT).show();
 
-                for (Person.Sale sale : friend.getSales()) {
+        for (Person.Sale sale : friend.getSales()) {
                     if (interest.getName().toLowerCase().equals(sale.getItemName().toLowerCase())) {
                         if (interest.getCost() >= sale.getPrice()) {
                             Toast.makeText(this, "Match Found!\n" + friend.getName() +

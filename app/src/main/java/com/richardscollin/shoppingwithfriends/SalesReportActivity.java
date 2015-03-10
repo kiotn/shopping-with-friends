@@ -40,6 +40,10 @@ public class SalesReportActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Handle the sale data to the appropriate place.
+     * @param view View
+     */
     public void passRegisterSaleItem(View view) {
         TextView saleName = (TextView) findViewById(R.id.saleName);
         TextView salePrice = (TextView) findViewById(R.id.salePrice);
