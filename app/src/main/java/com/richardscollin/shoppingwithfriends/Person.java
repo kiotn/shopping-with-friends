@@ -63,6 +63,9 @@ public class Person {
      * @param num rating to give.
      */
     public void giveRating(int num) {
+        if (num > 5 || num < 0) {
+            return;
+        }
         int total = rating * ratingWeight + num;
         ratingWeight += 1;
         rating = total / ratingWeight;
