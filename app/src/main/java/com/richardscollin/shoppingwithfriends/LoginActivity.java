@@ -29,9 +29,9 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        RegisteredUsers.setContext(getApplicationContext());
-        //RegisteredUsers.populate();
-        RegisteredUsers.readData();
+        Model.setContext(getApplicationContext());
+        //Model.populate();
+        Model.readData();
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);
@@ -140,7 +140,7 @@ public class LoginActivity extends Activity {
         protected Boolean doInBackground(Void... params) {
             //authenticating done here.
             Person tester = new Person(null, mEmail, mPasswordHash);
-            return RegisteredUsers.checkMembership(tester);
+            return Model.checkMembership(tester);
         }
 
         @Override
@@ -149,7 +149,7 @@ public class LoginActivity extends Activity {
 
             if (success) {
                 Intent i = new Intent(LoginActivity.this, LoggedInActivity.class);
-                RegisteredUsers.setCurrentPerson(mEmail);
+                Model.setCurrentPerson(mEmail);
                 startActivity(i);
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));

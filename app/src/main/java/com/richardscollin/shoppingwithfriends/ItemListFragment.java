@@ -74,7 +74,7 @@ public class ItemListFragment extends ListFragment {
                 getActivity(),
                 android.R.layout.simple_list_item_activated_1,
                 android.R.id.text1,
-                (List) Arrays.asList(RegisteredUsers.getCurrentPerson()
+                (List) Arrays.asList(Model.getCurrentPerson()
                         .getFriends())));
     }
 

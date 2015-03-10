@@ -15,7 +15,7 @@ import java.util.HashSet;
 /**
  * Created by John on 2/6/2015.
  */
-public final class RegisteredUsers {
+public final class Model {
 
     private static HashSet<Person> users = new HashSet<>();
     private static int userSize = 0;
@@ -170,7 +170,7 @@ public final class RegisteredUsers {
      * @param context context of the application.
      */
     public static void setContext(Context context) {
-        RegisteredUsers.context = context;
+        Model.context = context;
     }
 
     /**
@@ -194,7 +194,7 @@ public final class RegisteredUsers {
             FileWriter fileWriter = new FileWriter(file);
             fileWriter.write(cumulativeData);
             fileWriter.close();
-            Toast.makeText(context, "Data saved to device", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Data saved to device", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
             e.printStackTrace();
             return false;
@@ -216,7 +216,7 @@ public final class RegisteredUsers {
             jsonStrings = gson.fromJson(new BufferedReader(
                     new FileReader(new File(context.getFilesDir(), "appData"))
                     ), HashSet.class);
-            Toast.makeText(context, "Data read from device", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Data read from device", Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             return false;

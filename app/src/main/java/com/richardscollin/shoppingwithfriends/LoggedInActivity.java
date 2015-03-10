@@ -18,24 +18,47 @@ public class LoggedInActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logged_in);
+
         TextView hello = (TextView) findViewById(R.id.greeter);
-        hello.setText("Hello, " + RegisteredUsers.getCurrentPerson().getName());
+        hello.setText("Hello, " + Model.getCurrentPerson().getName());
         Toast toast = Toast.makeText(getApplicationContext(), "Logged in",Toast.LENGTH_SHORT);
         toast.show();
 
-        ArrayAdapter<Person> nameAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, RegisteredUsers.getUsers().toArray());
+        processMatches();
+
+
+        ArrayAdapter<Person> nameAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, Model.getUsers().toArray());
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(nameAdapter);
 
     }
 
+    public void processMatches() {
+        for (Person.Interest interest : Model.getCurrentPerson().getInterests()) {
+            for (Person friend : Model.getCurrentPerson().getFriends()) {
+                Toast.makeText(this, "size: " + friend.getSales().size(), Toast.LENGTH_SHORT).show();
+
+                for (Person.Sale sale : friend.getSales()) {
+                    if (interest.getName().toLowerCase().equals(sale.getItemName().toLowerCase())) {
+                        if (interest.getCost() >= sale.getPrice()) {
+                            Toast.makeText(this, "Match Found!\n" + friend.getName() +
+                                    " has a sale for " + sale.getItemName()
+                                    , Toast.LENGTH_LONG ).show();
+                        } else {
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     /**
      * Log the user out.
      *
-     * @param v
+     * @param v view
      */
     public void logOut(View v) {
-        RegisteredUsers.setCurrentPerson(null);
+        Model.setCurrentPerson(null);
         Toast toast = Toast.makeText(getApplicationContext(), "Logged out", Toast.LENGTH_SHORT);
         toast.show();
         finish();
@@ -80,18 +103,18 @@ public class LoggedInActivity extends ActionBarActivity {
     public void addFriend(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         String name = spinner.getSelectedItem().toString();
-        Person toAdd = RegisteredUsers.getPerson(name);
+        Person toAdd = Model.getPerson(name);
         if (null == toAdd) {
             Toast.makeText(getApplicationContext(),
                     "user doesn't exist", Toast.LENGTH_SHORT).show();
             return;
-        } else if (toAdd.getName().equals(RegisteredUsers.getCurrentPerson().getName())) {
+        } else if (toAdd.getName().equals(Model.getCurrentPerson().getName())) {
             Toast.makeText(getApplicationContext(),
                     "Can't add yourself!", Toast.LENGTH_SHORT).show();
             return;
         }
         boolean isInFriends = false;
-        for (Person i : RegisteredUsers.getCurrentPerson().getFriends()) {
+        for (Person i : Model.getCurrentPerson().getFriends()) {
             if (i.getName().equals(toAdd.getName())) {
                 isInFriends = true;
             }
@@ -104,7 +127,7 @@ public class LoggedInActivity extends ActionBarActivity {
 
         Toast toast = Toast.makeText(getApplicationContext(), "Adding friend " + name, Toast.LENGTH_SHORT);
         toast.show();
-        RegisteredUsers.getCurrentPerson().addFriend(
+        Model.getCurrentPerson().addFriend(
                 toAdd
         );
     }
@@ -116,19 +139,19 @@ public class LoggedInActivity extends ActionBarActivity {
     public void removeFriend(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         String name = spinner.getSelectedItem().toString();
-        Person toRemove = RegisteredUsers.getPerson(name);
+        Person toRemove = Model.getPerson(name);
 
         if (null == toRemove) {
             Toast.makeText(getApplicationContext(),
                     "user doesn't exist", Toast.LENGTH_SHORT).show();
             return;
-        } else if (toRemove.getName().equals(RegisteredUsers.getCurrentPerson().getName())) {
+        } else if (toRemove.getName().equals(Model.getCurrentPerson().getName())) {
             Toast.makeText(getApplicationContext(),
                     "Can't remove yourself!", Toast.LENGTH_SHORT).show();
             return;
         }
         boolean isInFriends = false;
-        for (Person i : RegisteredUsers.getCurrentPerson().getFriends()) {
+        for (Person i : Model.getCurrentPerson().getFriends()) {
             if (i.getName().equals(toRemove.getName())) {
                 isInFriends = true;
             }
@@ -140,7 +163,7 @@ public class LoggedInActivity extends ActionBarActivity {
         }
 
         Toast.makeText(getApplicationContext(), "Removing friend " + name, Toast.LENGTH_SHORT).show();
-        RegisteredUsers.getCurrentPerson().removeFriend(toRemove);
+        Model.getCurrentPerson().removeFriend(toRemove);
     }
 
     /**

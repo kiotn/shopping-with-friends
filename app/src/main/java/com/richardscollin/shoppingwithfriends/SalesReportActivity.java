@@ -4,6 +4,9 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class SalesReportActivity extends ActionBarActivity {
@@ -35,5 +38,28 @@ public class SalesReportActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void passRegisterSaleItem(View view) {
+        TextView saleName = (TextView) findViewById(R.id.saleName);
+        TextView salePrice = (TextView) findViewById(R.id.salePrice);
+        TextView saleLocation = (TextView) findViewById(R.id.saleLocation);
+
+
+        boolean nullFlag = true;
+        nullFlag &= null != saleName.getText();
+        nullFlag &= null != salePrice.getText();
+        nullFlag &= null != saleLocation.getText();
+
+        if (!nullFlag) {
+            Toast.makeText(this, "You are missing text", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        Model.getCurrentPerson().registerSale("" + saleName.getText(), "" + saleLocation.getText(),
+                Double.parseDouble("" + salePrice.getText()));
+
+        finish();
+
     }
 }

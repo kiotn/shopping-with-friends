@@ -47,11 +47,11 @@ public class RegisterInterest extends ActionBarActivity {
         TextView itemView = (TextView) findViewById(R.id.editItem);
         TextView priceView = (TextView) findViewById(R.id.editPrice);
 
-        RegisteredUsers.getCurrentPerson().registerInterest(
+        Model.getCurrentPerson().registerInterest(
                 "" + itemView.getText(),
                 Double.parseDouble("" + priceView.getText())
         );
-        RegisteredUsers.saveData();
+        Model.saveData();
         finish();
     }
 

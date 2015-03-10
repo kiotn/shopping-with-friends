@@ -14,6 +14,7 @@ public class Person {
     private int rating;
     private int ratingWeight;
     private HashSet<Interest> interests;
+    private HashSet<Sale> sales;
 
 
     /**
@@ -28,6 +29,7 @@ public class Person {
         this.passwordHash = passwordHash;
         friends = new FriendList();
         interests = new HashSet<>();
+        sales = new HashSet<>();
     }
 
     /**
@@ -64,7 +66,7 @@ public class Person {
         int total = rating * ratingWeight + num;
         ratingWeight += 1;
         rating = total / ratingWeight;
-        RegisteredUsers.saveData();
+        Model.saveData();
     }
 
     /**
@@ -92,7 +94,7 @@ public class Person {
             return;
         }
         friends.addFriend(person);
-        RegisteredUsers.saveData();
+        Model.saveData();
     }
 
     /**
@@ -101,7 +103,7 @@ public class Person {
      */
     public void removeFriend(Person person) {
         friends.removeFriend(person);
-        RegisteredUsers.saveData();
+        Model.saveData();
     }
 
     /**
@@ -111,19 +113,36 @@ public class Person {
      */
     public void registerInterest (String name, double cost) {
         interests.add(new Interest(name, cost));
-        RegisteredUsers.saveData();
+        Model.saveData();
+    }
+
+    public void registerSale(String item, String location, double cost) {
+        sales.add(new Sale(item, location, cost));
+        Model.saveData();
     }
 
     /**
      * Get a string representation of the sales set
      * @return string printout of the sales.
      */
-    public String getInterests() {
+    public String getInterestsToString() {
         String result = "---N Interests: " + interests.size() + "---\n";
         for (Interest i : interests) {
             result += i.toString() + "\n";
         }
         return result;
+    }
+
+    public String getSalesToString() {
+        String result = "---N Sales: " + sales.size() + "---\n";
+        for (Sale i : sales) {
+            result += i.toString() + "\n";
+        }
+        return result;
+    }
+
+    public HashSet<Interest> getInterests() {
+        return interests;
     }
 
     @Override
@@ -135,6 +154,8 @@ public class Person {
 
         if (!email.equals(person.email)) return false;
         if (!name.equals(person.name)) return false;
+        if (!sales.equals(person.getSales())) return false;
+        if (!interests.equals(person.getInterests())) return false;
 
         return true;
     }
@@ -143,6 +164,8 @@ public class Person {
     public int hashCode() {
         int result = name.hashCode();
         result = 31 * result + email.hashCode();
+        result += 31 * result + sales.hashCode();
+        result += 31 * result + interests.hashCode();
         return result;
     }
 
@@ -154,15 +177,28 @@ public class Person {
         return friends.toArray();
     }
 
+    public HashSet<Sale> getSales() {
+        return sales;
+    }
 
 
-    private class Interest {
+
+    public class Interest {
+
         private double cost;
         private String name;
 
         public Interest(String name, double cost) {
             this.name = name;
             this.cost = cost;
+        }
+
+        public double getCost() {
+            return cost;
+        }
+
+        public String getName() {
+            return name;
         }
 
         @Override
@@ -172,7 +208,6 @@ public class Person {
 
             Interest interest = (Interest) o;
 
-            if (Double.compare(interest.cost, cost) != 0) return false;
             if (!name.equals(interest.name)) return false;
 
             return true;
@@ -233,7 +268,7 @@ public class Person {
                 //return false;
             }
             friends.remove(person);
-            RegisteredUsers.saveData();
+            Model.saveData();
             return true;
         }
 
@@ -253,6 +288,64 @@ public class Person {
          */
         public Person[] toArray() {
             return friends.toArray(new Person[friends.size()]);
+        }
+    }
+
+    public class Sale{
+
+        String itemName;
+        String location;
+        double price;
+
+        public Sale(String itemName, String location, double price){
+            this.itemName = itemName;
+            this.location = location;
+            this.price = price;
+        }
+
+        public String getItemName() {
+            return itemName;
+        }
+
+        public String getLocation() {
+            return location;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Sale)) return false;
+
+            Sale sale = (Sale) o;
+
+            if (Double.compare(sale.price, price) != 0) return false;
+            if (!itemName.equals(sale.itemName)) return false;
+            if (!location.equals(sale.location)) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result;
+            long temp;
+            result = itemName.hashCode();
+            result = 31 * result + location.hashCode();
+            temp = Double.doubleToLongBits(price);
+            result = 31 * result + (int) (temp ^ (temp >>> 32));
+            return result;
+        }
+
+        public String toString() {
+            String result = "";
+            result += itemName;
+            result += " at $";
+            result += price;
+            return result;
         }
     }
 }

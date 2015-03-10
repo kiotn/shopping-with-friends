@@ -2,14 +2,11 @@ package com.richardscollin.shoppingwithfriends;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 
 /**
  * registration activity
@@ -33,12 +30,12 @@ public class RegisterActivity extends ActionBarActivity {
         String password = ((TextView) findViewById(R.id.registerPassword)).getText().toString();
         String name = ((TextView) findViewById(R.id.registerName)).getText().toString();
 
-        RegisteredUsers.registerUser(new Person(name, email, "" + password.hashCode()));
+        Model.registerUser(new Person(name, email, "" + password.hashCode()));
 
         Toast toast = Toast.makeText(getApplicationContext(), "Registering user: "
                 + email, Toast.LENGTH_LONG);
         toast.show();
-        RegisteredUsers.saveData();
+        Model.saveData();
         finish();
     }
 

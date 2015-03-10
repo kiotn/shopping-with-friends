@@ -36,7 +36,7 @@ public class ItemDetailFragment extends Fragment {
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // In a real-world scenario, use a Loader
             // to load content from a content provider.
-            mItem = RegisteredUsers.getCurrentPerson().getFriends()[
+            mItem = Model.getCurrentPerson().getFriends()[
                     Integer.parseInt(getArguments().getString(ARG_ITEM_ID))];
             rowID = Integer.parseInt(getArguments().getString(ARG_ITEM_ID));
         }
@@ -48,8 +48,8 @@ public class ItemDetailFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
         Person person = mItem;
-        person = RegisteredUsers.getPerson(mItem.getName());
-        //Person person = RegisteredUsers.getCurrentPerson().getFriends()[rowID - 1];
+        person = Model.getPerson(mItem.getName());
+        //Person person = Model.getCurrentPerson().getFriends()[rowID - 1];
         //Here's where the text is loaded.!!!!!
         if (mItem != null) {
             ((TextView) rootView.findViewById(R.id.item_detail)).setText("mItem.content");
@@ -60,7 +60,8 @@ public class ItemDetailFragment extends Fragment {
                     person.getEmail() + "\n" +
                     "###############\n" +
                     "Rating: " + person.getRating() + "\n###############\n" +
-                    person.getInterests()
+                    person.getInterestsToString() + "\n###############\n" +
+                    person.getSalesToString()
             );
         }
 
