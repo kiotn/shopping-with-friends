@@ -30,8 +30,8 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         Model.setContext(getApplicationContext());
-        //Model.populate();
-        Model.readData();
+        Model.populate();
+        //Model.readData();
 
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         mPasswordView = (EditText) findViewById(R.id.password);

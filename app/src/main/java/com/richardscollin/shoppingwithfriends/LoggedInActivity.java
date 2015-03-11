@@ -42,8 +42,6 @@ public class LoggedInActivity extends ActionBarActivity {
         //No indents to hide how bad this is.
         for (Person.Interest interest : Model.getCurrentPerson().getInterests()) {
         for (Person friend : Model.getCurrentPerson().getFriends()) {
-                Toast.makeText(this, "size: " + friend.getSales().size(), Toast.LENGTH_SHORT).show();
-
         for (Person.Sale sale : friend.getSales()) {
                     if (interest.getName().toLowerCase().equals(sale.getItemName().toLowerCase())) {
                         if (interest.getCost() >= sale.getPrice()) {
@@ -104,7 +102,7 @@ public class LoggedInActivity extends ActionBarActivity {
 
     /**
      * User can add a friend via this method. Fired with the add friend button is clicked.
-     * @param view
+     * @param view view
      */
     public void addFriend(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -140,7 +138,7 @@ public class LoggedInActivity extends ActionBarActivity {
 
     /**
      * Button fires this method. Removes the user pointed at by the spinner.
-     * @param view
+     * @param view view
      */
     public void removeFriend(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
@@ -174,7 +172,7 @@ public class LoggedInActivity extends ActionBarActivity {
 
     /**
      * Fired by button. Launches activity for the logged in user to write an interest.
-     * @param view
+     * @param view view
      */
     public void launchInterest(View view) {
         Intent intent = new Intent(this, RegisterInterest.class);
