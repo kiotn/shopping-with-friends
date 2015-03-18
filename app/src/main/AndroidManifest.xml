@@ -2,10 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.richardscollin.shoppingwithfriends" >
 
-    <!-- To auto-complete the email text field in the login form with the user's emails -->
-    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
-    <uses-permission android:name="android.permission.READ_PROFILE" />
-    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <!-- To get the location when registering a sale -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -29,10 +27,6 @@
         <activity
             android:name=".RegisterActivity"
             android:label="@string/title_activity_register" >
-        </activity>
-        <activity
-            android:name=".Friends"
-            android:label="@string/title_activity_friends" >
         </activity>
         <activity
             android:name=".ItemListActivity"

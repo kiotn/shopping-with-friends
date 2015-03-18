@@ -1,5 +1,7 @@
 package com.richardscollin.shoppingwithfriends;
 
+import android.location.Location;
+
 import java.util.HashSet;
 
 /**
@@ -119,8 +121,8 @@ public class Person {
         Model.saveData();
     }
 
-    public void registerSale(String item, String location, double cost) {
-        sales.add(new Sale(item, location, cost));
+    public void registerSale(String item, String location, double cost, Location gpsLocation) {
+        sales.add(new Sale(item, location, cost, gpsLocation));
         Model.saveData();
     }
 
@@ -138,7 +140,7 @@ public class Person {
 
     public String getSalesToString() {
         String result = "---N Sales: " + sales.size() + "---\n";
-        for (Sale i : sales) {
+        for (Sale i :  sales) {
             result += i.toString() + "\n";
         }
         return result;
@@ -319,6 +321,7 @@ public class Person {
         String itemName;
         String location;
         double price;
+        Location gpsLocation;
 
         /**
          * Constructor.
@@ -326,10 +329,11 @@ public class Person {
          * @param location place of item sale
          * @param price price of item sale
          */
-        public Sale(String itemName, String location, double price){
+        public Sale(String itemName, String location, double price, Location gpsLocation){
             this.itemName = itemName;
             this.location = location;
             this.price = price;
+            this.gpsLocation = gpsLocation;
         }
 
         /**
@@ -354,6 +358,10 @@ public class Person {
          */
         public double getPrice() {
             return price;
+        }
+
+        public Location getGpsLocation() {
+            return gpsLocation;
         }
 
         @Override
