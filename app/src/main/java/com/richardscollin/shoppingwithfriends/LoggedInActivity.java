@@ -180,7 +180,12 @@ public class LoggedInActivity extends ActionBarActivity {
     }
 
     public void reportSale(View view) {
-        Intent intent = new Intent(this,SalesReportActivity.class);
+        Intent intent = new Intent(this, SalesReportActivity.class);
+        startActivity(intent);
+    }
+
+    public void launchMap(View view) {
+        Intent intent = new Intent(this, SalesMap.class);
         startActivity(intent);
     }
 }

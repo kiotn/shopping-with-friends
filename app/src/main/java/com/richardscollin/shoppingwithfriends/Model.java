@@ -1,6 +1,7 @@
 package com.richardscollin.shoppingwithfriends;
 
 import android.content.Context;
+import android.location.Location;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -57,6 +58,11 @@ public final class Model {
         p4.registerInterest("Tennis Shoes", 49.99);
         p5.registerInterest("My Investment", 3500.00);
         p6.registerInterest("2 year associates", 60000.99);
+
+        Location UGALoc = new Location("");
+        UGALoc.setLatitude(33.9558);
+        UGALoc.setLongitude(-83.3745);
+        p2.registerSale("English Degree", "UGA", 36000, UGALoc);
     }
 
     /**

@@ -12,5 +12,6 @@
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_register_sale">RegisterSale</string>
     <string name="title_activity_sales_report">SalesReportActivity</string>
+    <string name="title_activity_sales_map">Map</string>
 
 </resources>
