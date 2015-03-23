@@ -10,7 +10,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:text="@string/logout"
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Welcome to SWF"
+        android:text="@string/welcomeMessage"
         android:id="@+id/greeter"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -30,7 +30,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Friends"
+        android:text="@string/viewFriends"
         android:id="@+id/button5"
         android:layout_below="@+id/greeter"
         android:layout_alignParentLeft="true"
@@ -42,7 +42,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Add Friend"
+        android:text="@string/addFriend"
         android:id="@+id/addfriendbutton"
         android:onClick="addFriend"
         android:layout_below="@+id/spinner"
@@ -52,7 +52,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Remove Friend"
+        android:text="@string/removeFriend"
         android:id="@+id/button8"
         android:layout_alignTop="@+id/addfriendbutton"
         android:onClick="removeFriend"
@@ -62,7 +62,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register Interest"
+        android:text="@string/registerInterest"
         android:id="@+id/button9"
         android:layout_alignTop="@+id/button"
         android:layout_alignParentLeft="true"
@@ -81,7 +81,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Report Sale"
+        android:text="@string/reportSale"
         android:id="@+id/button11"
         android:layout_above="@+id/button9"
         android:layout_alignParentLeft="true"
@@ -92,7 +92,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Sales"
+        android:text="@string/viewSales"
         android:id="@+id/button13"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"

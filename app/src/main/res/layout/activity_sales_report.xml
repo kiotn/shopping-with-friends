@@ -9,7 +9,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Register Sale"
+        android:text="@string/registerSale"
         android:id="@+id/button12"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/saleName"
-            android:hint="item name" />
+            android:hint="@string/itemName" />
 
         <EditText
             android:layout_width="match_parent"
@@ -37,13 +37,13 @@
             android:inputType="number"
             android:ems="10"
             android:id="@+id/salePrice"
-            android:hint="price" />
+            android:hint="@string/priceText" />
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/saleLocation"
-            android:hint="location" />
+            android:hint="@string/locationText" />
     </LinearLayout>
 
 </RelativeLayout>

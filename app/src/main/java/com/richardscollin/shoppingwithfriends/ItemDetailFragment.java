@@ -20,7 +20,7 @@ public class ItemDetailFragment extends Fragment {
      */
     public static final String ARG_ITEM_ID = "item_id";
     public int rowID = -1;
-    private Person mItem;
+    private User mItem;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -47,7 +47,7 @@ public class ItemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
-        Person person = mItem;
+        User person = mItem;
         person = Model.getPerson(mItem.getName());
         //Person person = Model.getCurrentPerson().getFriends()[rowID - 1];
         //Here's where the text is loaded.!!!!!

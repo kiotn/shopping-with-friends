@@ -11,6 +11,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashSet;
 
 /**
@@ -18,9 +19,8 @@ import java.util.HashSet;
  */
 public final class Model {
 
-    private static HashSet<Person> users = new HashSet<>();
-    private static int userSize = 0;
-    private static Person currentPerson;
+    private static Collection<User> users = new HashSet<>();
+    private static User currentPerson;
     private static Context context;
     private static HashSet jsonStrings = new HashSet();
 
@@ -30,12 +30,15 @@ public final class Model {
      */
     public static void populate() {
         //Create users with a quantity of 6, the number of the beast
-        Person p1 = new Person("George Burdell", "foo@example.com", "" + "hello".hashCode());
-        Person p2 = new Person("Bob Jones", "test@gatech.edu", "" + "hello".hashCode());
-        Person p3 = new Person("Donald Knith", "icecube@gmail.com", "" + "hello".hashCode());
-        Person p4 = new Person("Richard Feynmen", "tennisplayer@yahoo.com", "" + "hello".hashCode());
-        Person p5 = new Person("Alan Turang", "nigerianprince@scam.org", "" + "hello".hashCode());
-        Person p6 = new Person("Ronald McDonald", "evenbiggerscam@itttech.edu", "" + "hello".hashCode());
+        int passwordHash = "hello".hashCode();
+        User p1 = new Person("George Burdell", "foo@example.com", "" + passwordHash);
+        User p2 = new Person("Bob Jones", "test@gatech.edu", "" + passwordHash);
+        User p3 = new Person("Donald Knith", "icecube@gmail.com", "" + passwordHash);
+        User p4 = new Person("Richard Feynmen", "tennisplayer@yahoo.com", "" + passwordHash);
+        User p5 = new Person("Alan Turang", "nigerianprince@scam.org", "" + passwordHash);
+        User p6 = new Person("Ronald McDonald", "evenbiggerscam@itttech.edu", "" + passwordHash);
+        User p0 = new Admin("su@app.app", "" + passwordHash);
+        User p7 = new Guest();
         //register them
         users.add(p1);
         users.add(p2);
@@ -43,6 +46,8 @@ public final class Model {
         users.add(p4);
         users.add(p5);
         users.add(p6);
+        users.add(p0);
+        users.add(p7);
 
         //setup some friendships.
         p6.addFriend(p5);
@@ -78,7 +83,7 @@ public final class Model {
      * Get a reference to the user that is logged in
      * @return the logged in user
      */
-    public static Person getCurrentPerson() {
+    public static User getCurrentPerson() {
         return currentPerson;
     }
 
@@ -88,7 +93,7 @@ public final class Model {
      * @return true if registered.
      */
     public static boolean checkMembership(Person inQuestion) {
-        for (Person i : users) {
+        for (User i : users) {
             if (i.getEmail().equals(inQuestion.getEmail())) {
                 if (i.getPasswordHash().equals(inQuestion.getPasswordHash())) {
                     return true;
@@ -108,7 +113,6 @@ public final class Model {
             return false;
         }
         users.add(toAdd);
-        userSize++;
         saveData();
         return true;
     }
@@ -121,18 +125,20 @@ public final class Model {
     public static boolean removeUser(Person toRemove) {
         if (users.contains(toRemove)) {
             users.remove(toRemove);
-            userSize--;
             saveData();
+            Toast.makeText(context, "Person removed from app" + users.contains(toRemove), Toast.LENGTH_SHORT).show();
             return true;
+        } else {
+            Toast.makeText(context, "Person not found", Toast.LENGTH_SHORT).show();
+            return false;
         }
-        return false;
     }
 
     /**
      * Get the users to this collection.
      * @param userset set of users to replace current set.
      */
-    public static void setUsers(HashSet<Person> userset) {
+    public static void setUsers(HashSet<User> userset) {
         users = userset;
     }
 
@@ -140,7 +146,7 @@ public final class Model {
      * Get the users registered
      * @return HashSet of the people.
      */
-    public static HashSet<Person> getUsers() {
+    public static Collection<User> getUsers() {
         return users;
     }
 
@@ -150,9 +156,9 @@ public final class Model {
      * @param email email of person to get
      * @return null if person is not registered, otherwise reference.
      */
-    public static Person getPerson(int notUsed, String email) {
-        Person result = null;
-        for (Person i : users) {
+    public static User getPerson(int notUsed, String email) {
+        User result = null;
+        for (User i : users) {
             if (i.getEmail().equals(email)) {
                 result = i;
             }
@@ -165,9 +171,9 @@ public final class Model {
      * @param name name of the person such as "George Burdell"
      * @return the Person with this name. Null if no exist.
      */
-    public static Person getPerson(String name) {
-        Person result = null;
-        for (Person i : users) {
+    public static User getPerson(String name) {
+        User result = null;
+        for (User i : users) {
             if (i.getName().equals(name)) {
                 result = i;
             }
@@ -194,7 +200,7 @@ public final class Model {
 
 
         //load up the jsons into jsonStrings
-        for (Person i : users) {
+        for (User i : users) {
             jsonStrings.add(gson.toJson(i));
         }
         //load up this object into a json
@@ -207,7 +213,6 @@ public final class Model {
             fileWriter.close();
             //Toast.makeText(context, "Data saved to device", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
-            e.printStackTrace();
             return false;
         }
         return true;
@@ -229,7 +234,6 @@ public final class Model {
                     ), HashSet.class);
             //Toast.makeText(context, "Data read from device", Toast.LENGTH_SHORT).show();
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             return false;
         }
         users = new HashSet<>();
@@ -245,6 +249,6 @@ public final class Model {
      * @return int counting users.
      */
     public int getSize() {
-        return userSize;
+        return users.size();
     }
 }

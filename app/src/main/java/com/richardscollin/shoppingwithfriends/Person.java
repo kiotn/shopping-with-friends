@@ -2,12 +2,13 @@ package com.richardscollin.shoppingwithfriends;
 
 import android.location.Location;
 
+import java.util.Collection;
 import java.util.HashSet;
 
 /**
  * Created by John on 2/6/2015.
  */
-public class Person {
+public class Person implements User{
 
     private String name;
     private String email;
@@ -15,8 +16,8 @@ public class Person {
     private FriendList friends;
     private int rating;
     private int ratingWeight;
-    private HashSet<Interest> interests;
-    private HashSet<Sale> sales;
+    private Collection<Interest> interests;
+    private Collection<Sale> sales;
 
 
     /**
@@ -92,9 +93,9 @@ public class Person {
 
     /**
      * Method that adds person to friends
-     * @param person
+     * @param person person
      */
-    public void addFriend(Person person) {
+    public void addFriend(User person) {
         if (friends.checkMembership(person)) {
             return;
         }
@@ -104,9 +105,9 @@ public class Person {
 
     /**
      * Method that removes person from friends
-     * @param person
+     * @param person person
      */
-    public void removeFriend(Person person) {
+    public void removeFriend(User person) {
         friends.removeFriend(person);
         Model.saveData();
     }
@@ -146,7 +147,7 @@ public class Person {
         return result;
     }
 
-    public HashSet<Interest> getInterests() {
+    public Collection<Interest> getInterests() {
         return interests;
     }
 
@@ -168,9 +169,6 @@ public class Person {
     @Override
     public int hashCode() {
         int result = name.hashCode();
-        result = 31 * result + email.hashCode();
-        result += 31 * result + sales.hashCode();
-        result += 31 * result + interests.hashCode();
         return result;
     }
 
@@ -178,7 +176,7 @@ public class Person {
      * Method that gets the array of friends
      * @return array of friends
      */
-    public Person[] getFriends() {
+    public User[] getFriends() {
         return friends.toArray();
     }
 
@@ -186,7 +184,7 @@ public class Person {
      * Get the sales.
      * @return HashSet of the sales.
      */
-    public HashSet<Sale> getSales() {
+    public Collection<Sale> getSales() {
         return sales;
     }
 
@@ -265,7 +263,7 @@ public class Person {
     private class FriendList {
 
 
-        private HashSet<Person> friends = new HashSet<>();
+        private HashSet<User> friends = new HashSet<>();
 
         /**
          * Add a person to the friendlist.
@@ -274,7 +272,7 @@ public class Person {
          * @param person to be added
          * @return True if added. False if already added.
          */
-        public boolean addFriend(Person person) {
+        public boolean addFriend(User person) {
             if (checkMembership(person)) {
                 return false;
             }
@@ -288,10 +286,7 @@ public class Person {
          * @param person to be removed
          * @return True if removed. False if person does not exist.
          */
-        public boolean removeFriend(Person person) {
-            if (!checkMembership(person)) {
-                //return false;
-            }
+        public boolean removeFriend(User person) {
             friends.remove(person);
             Model.saveData();
             return true;
@@ -302,7 +297,7 @@ public class Person {
          * @param inQuestion to be checked in the system
          * @return True if inQuestion is contained in friends. False if inQuestion is not contained in friends
          */
-        public boolean checkMembership(Person inQuestion) {
+        public boolean checkMembership(User inQuestion) {
             return friends.contains(inQuestion);
         }
 
@@ -311,8 +306,8 @@ public class Person {
          *
          * @return array of friends
          */
-        public Person[] toArray() {
-            return friends.toArray(new Person[friends.size()]);
+        public User[] toArray() {
+            return friends.toArray(new User[friends.size()]);
         }
     }
 

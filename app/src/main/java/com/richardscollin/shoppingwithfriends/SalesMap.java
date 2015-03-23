@@ -8,7 +8,6 @@ import android.widget.Toast;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
@@ -63,10 +62,14 @@ public class SalesMap extends FragmentActivity {
         }
     }
 
+    /**
+     * Go through each of the sales on this user's friends list
+     * and put a marker on the map. Then, change the map viewing area to include the locations.
+     */
     private void putStuffOnMap() {
         mMap.clear();
         ArrayList<Person.Sale> sales = new ArrayList<>();
-        for (Person i : Model.getCurrentPerson().getFriends()) {
+        for (User i : Model.getCurrentPerson().getFriends()) {
             for (Person.Sale j : i.getSales()) {
                 if (null != j.getGpsLocation()) {
                     sales.add(j);

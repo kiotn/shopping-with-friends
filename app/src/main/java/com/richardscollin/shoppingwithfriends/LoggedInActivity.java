@@ -41,14 +41,13 @@ public class LoggedInActivity extends ActionBarActivity {
     public void processMatches() {
         //No indents to hide how bad this is.
         for (Person.Interest interest : Model.getCurrentPerson().getInterests()) {
-        for (Person friend : Model.getCurrentPerson().getFriends()) {
+        for (User friend : Model.getCurrentPerson().getFriends()) {
         for (Person.Sale sale : friend.getSales()) {
-                    if (interest.getName().toLowerCase().equals(sale.getItemName().toLowerCase())) {
+                    if (interest.getName().equalsIgnoreCase(sale.getItemName())) {
                         if (interest.getCost() >= sale.getPrice()) {
                             Toast.makeText(this, "Match Found!\n" + friend.getName() +
                                     " has a sale for " + sale.getItemName()
-                                    , Toast.LENGTH_LONG ).show();
-                        } else {
+                                    , Toast.LENGTH_LONG).show();
                         }
                     }
                 }
@@ -107,7 +106,7 @@ public class LoggedInActivity extends ActionBarActivity {
     public void addFriend(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         String name = spinner.getSelectedItem().toString();
-        Person toAdd = Model.getPerson(name);
+        User toAdd = Model.getPerson(name);
         if (null == toAdd) {
             Toast.makeText(getApplicationContext(),
                     "user doesn't exist", Toast.LENGTH_SHORT).show();
@@ -118,7 +117,7 @@ public class LoggedInActivity extends ActionBarActivity {
             return;
         }
         boolean isInFriends = false;
-        for (Person i : Model.getCurrentPerson().getFriends()) {
+        for (User i : Model.getCurrentPerson().getFriends()) {
             if (i.getName().equals(toAdd.getName())) {
                 isInFriends = true;
             }
@@ -143,7 +142,7 @@ public class LoggedInActivity extends ActionBarActivity {
     public void removeFriend(View view) {
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         String name = spinner.getSelectedItem().toString();
-        Person toRemove = Model.getPerson(name);
+        User toRemove = Model.getPerson(name);
 
         if (null == toRemove) {
             Toast.makeText(getApplicationContext(),
@@ -155,14 +154,14 @@ public class LoggedInActivity extends ActionBarActivity {
             return;
         }
         boolean isInFriends = false;
-        for (Person i : Model.getCurrentPerson().getFriends()) {
+        for (User i : Model.getCurrentPerson().getFriends()) {
             if (i.getName().equals(toRemove.getName())) {
                 isInFriends = true;
             }
         }
         if (!isInFriends) {
             Toast.makeText(getApplicationContext(),
-                    "user is already not in friends", Toast.LENGTH_SHORT).show();
+                    "user is not in friends", Toast.LENGTH_SHORT).show();
             return;
         }
 

@@ -43,7 +43,7 @@ public class RegisterInterest extends ActionBarActivity {
      * Register this sale to the current person.
      * @param view view
      */
-    public void RegisterInterest(View view) {
+    public void Register(View view) {
         TextView itemView = (TextView) findViewById(R.id.editItem);
         TextView priceView = (TextView) findViewById(R.id.editPrice);
 
