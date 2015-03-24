@@ -9,7 +9,7 @@ import java.util.HashSet;
  * Created by John on 2/6/2015.
  * Class for Person, the normal user of the app.
  */
-public class Person implements User{
+public class Person implements User {
 
     final private String name;
     final private String email;
