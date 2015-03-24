@@ -103,6 +103,6 @@ public class SalesMap extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-
+        putStuffOnMap();
     }
 }

@@ -17,8 +17,8 @@ import com.google.android.gms.location.LocationServices;
 public class SalesReportActivity extends ActionBarActivity
         implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener{
 
-    GoogleApiClient mGoogleApiClient;
-    Location mLocation;
+    private GoogleApiClient mGoogleApiClient;
+    private Location mLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,10 +62,8 @@ public class SalesReportActivity extends ActionBarActivity
         TextView saleLocation = (TextView) findViewById(R.id.saleLocation);
 
 
-        boolean nullFlag = true;
-        nullFlag &= null != saleName.getText();
-        nullFlag &= null != salePrice.getText();
-        nullFlag &= null != saleLocation.getText();
+        boolean nullFlag = (null == saleName.getText()) || (null == salePrice.getText())
+                || (null == saleLocation.getText());
 
         if (!nullFlag) {
             Toast.makeText(this, "You are missing text", Toast.LENGTH_SHORT).show();
@@ -78,7 +76,7 @@ public class SalesReportActivity extends ActionBarActivity
 
     }
 
-    protected synchronized void buildGoogleApiClient() {
+    synchronized void buildGoogleApiClient() {
         mGoogleApiClient = new GoogleApiClient.Builder(this)
                 .addConnectionCallbacks(this)
                 .addOnConnectionFailedListener(this)

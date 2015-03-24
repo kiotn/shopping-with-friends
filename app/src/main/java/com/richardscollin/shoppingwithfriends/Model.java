@@ -16,8 +16,9 @@ import java.util.HashSet;
 
 /**
  * Created by John on 2/6/2015.
+ * Class for the application model
  */
-public final class Model {
+final class Model {
 
     private static Collection<User> users = new HashSet<>();
     private static User currentPerson;
@@ -37,7 +38,7 @@ public final class Model {
         User p4 = new Person("Richard Feynmen", "tennisplayer@yahoo.com", "" + passwordHash);
         User p5 = new Person("Alan Turang", "nigerianprince@scam.org", "" + passwordHash);
         User p6 = new Person("Ronald McDonald", "evenbiggerscam@itttech.edu", "" + passwordHash);
-        User p0 = new Admin("su@app.app", "" + passwordHash);
+        User p0 = new Admin("" + passwordHash);
         User p7 = new Guest();
         //register them
         users.add(p1);
@@ -106,15 +107,10 @@ public final class Model {
     /**
      * Register this person into the app.
      * @param toAdd Person to add
-     * @return true if added, false if not added.
      */
-    public static boolean registerUser(Person toAdd) {
-        if (users.contains(toAdd)) {
-            return false;
-        }
+    public static void registerUser(Person toAdd) {
         users.add(toAdd);
         saveData();
-        return true;
     }
 
     /**
@@ -156,7 +152,7 @@ public final class Model {
      * @param email email of person to get
      * @return null if person is not registered, otherwise reference.
      */
-    public static User getPerson(int notUsed, String email) {
+    private static User getPerson(int notUsed, String email) {
         User result = null;
         for (User i : users) {
             if (i.getEmail().equals(email)) {
@@ -239,7 +235,7 @@ public final class Model {
         users = new HashSet<>();
         //go through each string in the hashset, and create a user for each one.
         for (Object i : jsonStrings) {
-            users.add((Person) gson.fromJson((String) i, Person.class));
+            users.add(gson.fromJson((String) i, Person.class));
         }
         return true;
     }

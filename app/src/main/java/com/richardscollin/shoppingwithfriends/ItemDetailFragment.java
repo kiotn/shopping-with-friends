@@ -18,8 +18,7 @@ public class ItemDetailFragment extends Fragment {
      * The fragment argument representing the item ID that this fragment
      * represents.
      */
-    public static final String ARG_ITEM_ID = "item_id";
-    public int rowID = -1;
+    static final String ARG_ITEM_ID = "item_id";
     private User mItem;
 
     /**
@@ -38,7 +37,6 @@ public class ItemDetailFragment extends Fragment {
             // to load content from a content provider.
             mItem = Model.getCurrentPerson().getFriends()[
                     Integer.parseInt(getArguments().getString(ARG_ITEM_ID))];
-            rowID = Integer.parseInt(getArguments().getString(ARG_ITEM_ID));
         }
     }
 
@@ -47,8 +45,7 @@ public class ItemDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_item_detail, container, false);
 
-        User person = mItem;
-        person = Model.getPerson(mItem.getName());
+        User person = Model.getPerson(mItem.getName());
         //Person person = Model.getCurrentPerson().getFriends()[rowID - 1];
         //Here's where the text is loaded.!!!!!
         if (mItem != null) {

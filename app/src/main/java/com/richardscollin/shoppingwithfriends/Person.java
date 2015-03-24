@@ -7,18 +7,18 @@ import java.util.HashSet;
 
 /**
  * Created by John on 2/6/2015.
+ * Class for Person, the normal user of the app.
  */
 public class Person implements User{
 
-    private String name;
-    private String email;
-    private String passwordHash;
-    private FriendList friends;
+    final private String name;
+    final private String email;
+    final private String passwordHash;
+    final private FriendList friends;
     private int rating;
     private int ratingWeight;
     private Collection<Interest> interests;
     private Collection<Sale> sales;
-
 
     /**
      * Person constructor.
@@ -158,18 +158,13 @@ public class Person implements User{
 
         Person person = (Person) o;
 
-        if (!email.equals(person.email)) return false;
-        if (!name.equals(person.name)) return false;
-        if (!sales.equals(person.getSales())) return false;
-        if (!interests.equals(person.getInterests())) return false;
+        return !(!email.equals(person.email) || !name.equals(person.name));
 
-        return true;
     }
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        return result;
+        return name.hashCode();
     }
 
     /**
@@ -206,7 +201,7 @@ public class Person implements User{
 
         /**
          * Get the cost of this interest.
-         * @return the cost of this interset.
+         * @return the cost of this interest.
          */
         public double getCost() {
             return cost;
@@ -227,9 +222,8 @@ public class Person implements User{
 
             Interest interest = (Interest) o;
 
-            if (!name.equals(interest.name)) return false;
+            return name.equals(interest.name);
 
-            return true;
         }
 
         @Override
@@ -270,26 +264,19 @@ public class Person implements User{
          *
          *
          * @param person to be added
-         * @return True if added. False if already added.
          */
-        public boolean addFriend(User person) {
-            if (checkMembership(person)) {
-                return false;
-            }
+        public void addFriend(User person) {
             friends.add(person);
-            return true;
         }
 
 
         /**
          * Remove a person from friendlist
          * @param person to be removed
-         * @return True if removed. False if person does not exist.
          */
-        public boolean removeFriend(User person) {
+        public void removeFriend(User person) {
             friends.remove(person);
             Model.saveData();
-            return true;
         }
 
         /**
@@ -313,10 +300,10 @@ public class Person implements User{
 
     public class Sale{
 
-        String itemName;
-        String location;
+        final String itemName;
+        final String location;
         double price;
-        Location gpsLocation;
+        final Location gpsLocation;
 
         /**
          * Constructor.
@@ -366,11 +353,8 @@ public class Person implements User{
 
             Sale sale = (Sale) o;
 
-            if (Double.compare(sale.price, price) != 0) return false;
-            if (!itemName.equals(sale.itemName)) return false;
-            if (!location.equals(sale.location)) return false;
+            return Double.compare(sale.price, price) == 0 && itemName.equals(sale.itemName) && location.equals(sale.location);
 
-            return true;
         }
 
         @Override

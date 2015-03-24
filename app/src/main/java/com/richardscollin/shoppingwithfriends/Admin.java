@@ -1,23 +1,18 @@
 package com.richardscollin.shoppingwithfriends;
 
-import android.graphics.AvoidXfermode;
 import android.location.Location;
-import android.widget.Toast;
-
 import java.util.Collection;
 import java.util.HashSet;
 
 /**
  * Created by john on 3/22/15.
+ * Class for an admin user.
  */
 public class Admin implements User {
+    final private String passwordHash;
 
-    String email;
-    String passwordHash;
-
-    public Admin (String email, String passwordHash) {
-        this.email = email;
-        this.passwordHash = passwordHash;
+    public Admin (String pPasswordHash) {
+        passwordHash = pPasswordHash;
     }
 
     public String getName() {
@@ -25,12 +20,12 @@ public class Admin implements User {
     }
 
     public String getEmail() {
-        return email;
+        return "root@root";
     }
 
     @Override
     public String getPasswordHash() {
-        return null;
+        return passwordHash;
     }
 
     public void giveRating(int num) {
@@ -77,7 +72,8 @@ public class Admin implements User {
     }
 
     public User[] getFriends() {
-        return (User[]) Model.getUsers().toArray(new Person[Model.getUsers().size()]);
+
+        return Model.getUsers().toArray(new User[Model.getUsers().size()]);
     }
 
     public Collection<Person.Sale> getSales() {

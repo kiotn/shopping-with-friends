@@ -7,6 +7,7 @@ import java.util.HashSet;
 
 /**
  * Created by john on 3/23/15.
+ * Class for guest user.
  */
 public class Guest implements User{
 

@@ -6,6 +6,7 @@ import java.util.Collection;
 
 /**
  * Created by john on 3/23/15.
+ * Class for User interface, most high level interface for registered user.
  */
 public interface User {
 

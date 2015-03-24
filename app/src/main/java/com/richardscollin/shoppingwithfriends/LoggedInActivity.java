@@ -27,7 +27,7 @@ public class LoggedInActivity extends ActionBarActivity {
         processMatches();
 
 
-        ArrayAdapter<Person> nameAdapter = new ArrayAdapter(this, R.layout.support_simple_spinner_dropdown_item, Model.getUsers().toArray());
+        ArrayAdapter<User> nameAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, (User[]) Model.getUsers().toArray());
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(nameAdapter);
 
@@ -38,7 +38,7 @@ public class LoggedInActivity extends ActionBarActivity {
      * The method will pop up a toast message to the user notifying them of the user and the item for
      * which there is a match. The user can then go into the friends list and view the sale.
      */
-    public void processMatches() {
+    void processMatches() {
         //No indents to hide how bad this is.
         for (Person.Interest interest : Model.getCurrentPerson().getInterests()) {
         for (User friend : Model.getCurrentPerson().getFriends()) {
