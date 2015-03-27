@@ -30,6 +30,10 @@ final class Model {
      * setup some friendships.
      */
     public static void populate() {
+        if (users.size() != 0) {
+            return;
+        }
+
         //Create users with a quantity of 6, the number of the beast
         int passwordHash = "hello".hashCode();
         User p1 = new Person("George Burdell", "foo@example.com", "" + passwordHash);
@@ -93,7 +97,7 @@ final class Model {
      * @param inQuestion person to check
      * @return true if registered.
      */
-    public static boolean checkMembership(Person inQuestion) {
+    public static boolean checkMembership(User inQuestion) {
         for (User i : users) {
             if (i.getEmail().equals(inQuestion.getEmail())) {
                 if (i.getPasswordHash().equals(inQuestion.getPasswordHash())) {
@@ -108,7 +112,7 @@ final class Model {
      * Register this person into the app.
      * @param toAdd Person to add
      */
-    public static void registerUser(Person toAdd) {
+    public static void registerUser(User toAdd) {
         users.add(toAdd);
         saveData();
     }
@@ -118,14 +122,14 @@ final class Model {
      * @param toRemove Person to remove
      * @return true if removed, false otherwise.
      */
-    public static boolean removeUser(Person toRemove) {
+    public static boolean removeUser(User toRemove) {
         if (users.contains(toRemove)) {
             users.remove(toRemove);
             saveData();
-            Toast.makeText(context, "Person removed from app" + users.contains(toRemove), Toast.LENGTH_SHORT).show();
+            msg("Person removed from app");
             return true;
         } else {
-            Toast.makeText(context, "Person not found", Toast.LENGTH_SHORT).show();
+            msg("Person not found");
             return false;
         }
     }
@@ -191,6 +195,9 @@ final class Model {
      * @return true if saved, false otherwise
      */
     public static boolean saveData() {
+        if (null == context) {
+            return false;
+        }
         Gson gson = new Gson();
         jsonStrings = new HashSet();
 
@@ -219,6 +226,9 @@ final class Model {
      * @return true if read, false if not read.
      */
     public static boolean readData() {
+        if (null == context) {
+            return false;
+        }
         Gson gson = new Gson();
         users = new HashSet<>();
 
@@ -246,5 +256,12 @@ final class Model {
      */
     public int getSize() {
         return users.size();
+    }
+
+    public static void msg(String msg) {
+        if (null == context) {
+            return;
+        }
+        Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 }
