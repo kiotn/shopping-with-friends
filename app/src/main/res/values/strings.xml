@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Shopping with Friends</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_hello">HelloActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_activity_register_sale">RegisterSale</string>
+    <string name="title_activity_sales_report">SalesReportActivity</string>
+    <string name="title_activity_sales_map">Map</string>
+    <string name="addFriend">Add a Friend</string>
+    <string name="removeFriend">Remove a Friend</string>
+    <string name="logout">Logout</string>
+    <string name="welcomeMessage">Welcome to SWF</string>
+    <string name="viewFriends">View Friends</string>
+    <string name="registerInterest">Register Interest</string>
+    <string name="reportSale">Report Sale</string>
+    <string name="viewSales">View Sales</string>
+    <string name="registerYourAccount">Register Your Account</string>
+    <string name="emailText">email</string>
+    <string name="passwordText">password</string>
+    <string name="registerText">Register</string>
+    <string name="cancelText">Cancel</string>
+    <string name="nameHintText">name</string>
+    <string name="locationText">location</string>
+    <string name="priceText">price</string>
+    <string name="itemName">item name</string>
+    <string name="itemText">Item</string>
+    <string name="maxPrice">Max Price</string>
+    <string name="orTextDivider">----Or----</string>
+    <string name="registerSale">Register Sale</string>
+
+</resources>
