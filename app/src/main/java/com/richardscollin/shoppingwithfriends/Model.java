@@ -258,7 +258,7 @@ final class Model {
         return users.size();
     }
 
-    public static void msg(String msg) {
+    private static void msg(String msg) {
         if (null == context) {
             return;
         }
