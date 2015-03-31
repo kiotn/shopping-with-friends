@@ -1,10 +1,20 @@
 package com.richardscollin.shoppingwithfriends;
 
-import junit.framework.TestCase ;
+import android.app.Application;
+import android.graphics.AvoidXfermode;
+import android.test.ApplicationTestCase;
+import junit.framework.Assert;
 
-public class PersonEqualTest extends TestCase{
+import java.util.HashSet;
 
-   // @Test
+/**
+ * <a href="http://d.android.com/tools/testing/testing_android.html">Testing Fundamentals</a>
+ */
+public class PersonEqualTest extends ApplicationTestCase<Application> {
+    public PersonEqualTest() {
+        super(Application.class);
+    }
+
     public void testSamePerson() {
         Person user = new Person("name", "email", "passwordHash");
         Person tester;
@@ -12,22 +22,18 @@ public class PersonEqualTest extends TestCase{
         assertTrue(user.equals(tester));
     }
 
-   // @Test
     public void testDifferentPersons() {
         Person user = new Person("name", "email", "passwordHash");
         Person tester = new Person("name2", "email2", "passwordHash2");
         assertFalse(user.equals(tester));
     }
 
-
-   // @Test
     public void testDifferentObjects() {
         Person user = new Person("name", "email", "passwordHash");
         Object tester = new String("");
         assertFalse(user.equals(tester));
     }
 
-   // @Test
     public void testSamePersonDifferent() {
         Person user = new Person("name", "email", "passwordHash");
         Person tester = new Person("name", "email", "passwordHash");
