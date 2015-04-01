@@ -36,7 +36,7 @@ public class Guest implements User {
     }
 
     @Override
-    public int getRating() {
+    public double getRating() {
         return 0;
     }
 

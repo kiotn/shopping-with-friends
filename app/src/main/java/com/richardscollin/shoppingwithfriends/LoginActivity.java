@@ -119,7 +119,7 @@ public class LoginActivity extends Activity {
      * @return true if valid.
      */
     private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        return password.length() > 3;
     }
 
     /**

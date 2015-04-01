@@ -15,7 +15,7 @@ public class Person implements User {
     final private String email;
     final private String passwordHash;
     final private FriendList friends;
-    private int rating;
+    private double rating;
     private int ratingWeight;
     private Collection<Interest> interests;
     private Collection<Sale> sales;
@@ -69,7 +69,7 @@ public class Person implements User {
         if (num > 5 || num < 0) {
             return;
         }
-        int total = rating * ratingWeight + num;
+        double total = rating * ratingWeight + num;
         ratingWeight += 1;
         rating = total / ratingWeight;
         Model.saveData();
@@ -79,7 +79,7 @@ public class Person implements User {
      * Get this users rating
      * @return rating
      */
-    public int getRating() {
+    public double getRating() {
         return rating;
     }
 

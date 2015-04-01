@@ -32,7 +32,7 @@ public class Admin implements User {
         //swallow the rating.
     }
 
-    public int getRating() {
+    public double getRating() {
         return Integer.MAX_VALUE;
     }
 

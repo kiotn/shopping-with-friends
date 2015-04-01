@@ -39,7 +39,7 @@ public interface User {
      * Get the current rating of this User.
      * @return rating.
      */
-    int getRating();
+    double getRating();
 
     /**
      * Add a friend to this User's friendlist. Up to the implementation to decide
