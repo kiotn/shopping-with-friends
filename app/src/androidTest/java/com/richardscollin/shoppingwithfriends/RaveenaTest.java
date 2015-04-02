@@ -59,7 +59,6 @@ public class RaveenaTest extends ApplicationTestCase<Application> {
             Model.removeUser(i);
         }
         assertTrue(Model.getUsers().size()== 2);
-            //Guest and admin do not use comparison, and cannot be removed from app.
     }
 
     public void testRaveenaRemoveNonExistantUser() {
