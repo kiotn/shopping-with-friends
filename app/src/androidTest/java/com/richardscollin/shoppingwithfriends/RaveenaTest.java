@@ -30,52 +30,51 @@ public class RaveenaTest extends ApplicationTestCase<Application> {
         Model.setCurrentPerson(null);
     }
 
-    public void testNoPopulate() {
-        //Do not populate the user list.
-        assertTrue(null == Model.getCurrentPerson());
-        assertEquals(new HashSet<User>(), Model.getUsers());
-    }
-
-    public void testOnePopulate() {
+    public void testRaveenaRemoveFriendBySize() {
+        //Remove friend
+        //Remove a user in the app
         Model.populate();
         assertTrue(Model.getUsers().size() == 8);
-        for (User i : users) {
-            assertTrue(Model.checkMembership(i));
-        }
+        Model.removeUser(users[0]);
+        assertTrue(Model.getUsers().size() == 7);
+
     }
 
-    public void testMultPopulate() {
-        for (int i = 0; i < 100; i++) {
-            Model.populate();
-        }
-        assertTrue("Size was: " + Model.getUsers().size(), Model.getUsers().size() == 8);
-        for (User i : users) {
-            assertTrue(Model.checkMembership(i));
-        }
+    public void testRaveenaRemoveFriendByMembership() {
+        //Remove friend
+        //Remove a user in the app
+        Model.populate();
+        User george = users[0];
+        assertTrue(Model.checkMembership(george));
+        Model.removeUser(george);
+        assertFalse(Model.checkMembership(george));
     }
 
-    public void testPopulateAndRemove() {
-        for (int i = 0; i < 38; i++) {  //try a prime
+    public void testRaveenaRemoveAll() {
+        for (int i = 0; i < 10; i++) {
             Model.populate();
         }
-        for (User i : users) {
-            assertTrue(Model.checkMembership(i));
-        }
+        assertTrue(Model.getUsers().size() == 8);
         for (User i : users) {
             Model.removeUser(i);
         }
-
-        assertTrue("Size was: " + Model.getUsers().size(), Model.getUsers().size() == 2);
+        assertTrue(Model.getUsers().size()== 2);
             //Guest and admin do not use comparison, and cannot be removed from app.
     }
 
-    public void testAddOneThenPopulate() {
-        Model.registerUser(new Person("Hi", "Hi", "" + 21));
-        Model.populate();
+    public void testRaveenaRemoveNonExistantUser() {
+        //add a new user
+        User george = new Person("George Burdell", "foo@example.com", "" + passwordHash);
+        Model.registerUser(george);
+        assertTrue(Model.checkMembership(george));
         assertTrue(Model.getUsers().size() == 1);
-        Model.removeUser(new Person("Hi", "Hi", "" + 21));
+        assertTrue(Model.checkMembership(george));
+        Model.removeUser(george);
+        assertFalse(Model.checkMembership(george));
         assertTrue(Model.getUsers().size() == 0);
-        Model.populate();
-        assertTrue(Model.getUsers().size() == 8);
+        assertFalse(Model.checkMembership(george));
+        //assert true
+        //remove that user
+        //asesert false
     }
 }
