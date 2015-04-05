@@ -27,7 +27,7 @@ public class LoggedInActivity extends ActionBarActivity {
         processMatches();
 
 
-        ArrayAdapter<User> nameAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, (User[]) Model.getUsers().toArray());
+        ArrayAdapter nameAdapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, Model.getUsers().toArray());
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         spinner.setAdapter(nameAdapter);
 
